@@ -1,3 +1,205 @@
-body {
-  background-color: #CCC;
+/* ==================================================
+   NAVBAR STYLES
+   - Logo
+   - Title
+   - Navigation links
+   - Search form
+================================================== */
+
+/* Logo + Title container */
+.navbar-brand {
+  display: flex;            /* Align logo and title horizontally */
+  align-items: flex-end;    /* Align title to bottom of logo */
+  gap: 10px;                /* Space between logo and text */
+  margin-left: 15px;        /* Space from left edge */
+}
+
+/* Logo size */
+#logo {
+  width: 40px;              /* Fixed logo width */
+}
+
+/* Project title styling */
+#moviecircle-title {
+  position: relative;
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: -5px;      /* Align adjustment */
+
+  /* Gold gradient text effect */
+  background: linear-gradient(to right, #F4C98E, #8E7553);
+  background-clip: text;
+  -webkit-background-clip: text;
+
+  /* Makes gradient visible */
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+
+  /* Smooth hover transition */
+  transition: filter 0.3s ease;
+  color: #F4C98E;           /* Fallback color */
+}
+
+/* Title hover effect */
+#moviecircle-title:hover {
+  filter: brightness(1.2);  /* Slight brightness increase */
+}
+
+/* Navbar background */
+#main-navbar {
+  background-color: #121212; /* Dark theme background */
+}
+
+/* ==================================================
+   SEARCH FORM
+================================================== */
+
+#search-form {
+  display: flex;
+  background-color: #FFF;
+  border-radius: 5px;
+  max-width: 400px;
+  margin: 0 20px;
+}
+
+/* Search input customization */
+#search-form .form-control {
+   border: none;
+  flex: 1;
+  box-shadow: none;
+}
+
+/* ==================================================
+   NAVIGATION LINKS
+================================================== */
+
+#navbar {
+  min-width: 30%;
+}
+
+/* Default nav link style */
+.navbar-nav .nav-item .nav-link {
+  color: #FFF;
+  transition: .5s;
+}
+
+/* Hover highlight effect */
+.navbar-nav .nav-item .nav-link:hover {
+  color: #f5c518;           /* gold highlight */
+}
+
+/* Align nav items to the right */
+.navbar-nav {
+  justify-content: flex-end;
+  width: 100%;
+}
+
+/* Utility class */
+.bold {
+  font-weight: bold;
+}
+
+/* ==================================================
+   FLASH MESSAGES
+   - Temporary user feedback (success / error)
+   - Used with session-based flash system
+================================================== */
+
+/* Flash message wrapper */
+.msg-container {
+  background-color: #000;   /* Matches site dark theme */
+  padding: 15px;
+}
+
+/* Base message box */
+.msg {
+  width: 60%;                 /* Centered fixed width */
+  margin: 0 auto;             /* Horizontal centering */
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;         /* Slight rounded corners */
+}
+
+/* Error message style */
+.msg.error {
+  color: #842029;
+  background-color: #F8D7DA;
+  border-color: #F5C2C7;
+}
+
+/* Success message style */
+.msg.success {
+  color: #0F5132;
+  background-color: #D1E7DD;
+  border-color: #ABDBCC;
+}
+
+
+/* ==================================================
+   HOME SECTION
+================================================== */
+
+#main-container {           
+  background-color: #000;   /* Black background */
+  color: #FFF;              /* White Text */
+  min-height: 65vh;           /* Minimum viewport height */
+  padding: 40px;
+}
+
+/* ==================================================
+  FOOTER
+================================================== */
+
+#footer {
+  background-color: #000;
+  color: #FFF;
+  text-align: center;
+  margin: 0;
+  padding: 20px;
+}
+
+/* Remove list styling */
+#social-container ul,
+#footer-links-container ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Horizontal list items */
+#social-container li,
+#footer-links-container li {
+  display: inline-block;
+  margin: 0 20px;
+}
+
+/* Social icon container */
+#social-container li {
+  height: 40px;
+  width: 40px;
+  border-radius: 100%;
+  transition: .5s;
+  line-height: 3;
+}
+
+/* Social icon hover background */
+#social-container li:hover {
+  background-color: #333;
+}
+
+/* Footer links and social icons color */
+#social-container a,
+#footer-links-container a {
+  text-decoration: none;
+  color: #FFF;
+  transition: .5s;
+}
+
+/*  social icons size */
+#social-container li i {
+  font-size: 25px;
+}
+
+/* Footer spacing */
+#footer-links-container {
+  margin: 30px 0;
 }
