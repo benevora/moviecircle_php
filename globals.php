@@ -18,5 +18,3 @@
 // Get current project folder
 $folder = basename(__DIR__); // safer than dirname($_SERVER['REQUEST_URI'])
 $BASE_URL = "http://{$serverName}/{$folder}/";
-
-// Now your links like <link href="<?php echo $BASE_URL ?>assets/css/styles.css"> will work
