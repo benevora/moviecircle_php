@@ -181,8 +181,9 @@
 ================================================== */
 #login-container .form-group,
 #register-container .form-group {
-  margin-bottom: lren;
+  margin-bottom: 1rem;
 }
+
 
 /* ==================================================
   Primary Auth Button
