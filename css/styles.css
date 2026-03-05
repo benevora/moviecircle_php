@@ -145,6 +145,69 @@
   min-height: 65vh;           /* Minimum viewport height */
   padding: 40px;
 }
+/* ==================================================
+  auth layout
+================================================== */
+#auth-row{
+  justify-content: space-evenly; /* even horizontal spacing*/
+}
+
+#login-container h2,
+#register-container h2{
+  text-align: center;
+  border-bottom: 2px solid #ffd54f; /* accent underline*/
+  width: 270px; /*underline width */
+  margin: 0 auto;   /* center block horizontally*/
+  padding: 10px;  /*text space*/
+
+}
+/* ==================================================
+ form containers
+ -limits form width
+ -centers forms on the page
+================================================== */
+#login-container form,
+#register-container form{
+  display: block;
+  max-width: 400px;   /* prevent overly wide forms */
+  margin: 30px auto;   /* vertical spacing and horizontal centering*/
+}
+/* ==================================================
+  form spacing fix(bootstrap 5 compatability)
+================================================== */
+#login-container .form-group,
+#register-container .form-group{
+  margin-bottom: lren;
+}
+
+/* ==================================================
+  Primary Auth Button
+================================================== */
+card-btn{
+  color: #000;
+  background-color: #ffd54f;
+  border: 2px solid #ffd54f;
+  width:  100%;
+}
+
+
+/* ==================================================
+  Button hover effect
+================================================== */
+.card-btn:hover{
+  background-color: transparent;
+  color: #ffd54f;
+  border-color: #ffd54f;
+  transition: all 0.2s ease-in-out;
+}
+
+@media(max-width: 768px){
+  #login-container,
+  #register-container{
+    margin-bottom: 30px;
+  }
+}
+
 
 /* ==================================================
   FOOTER
