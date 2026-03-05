@@ -148,12 +148,16 @@
 /* ==================================================
   auth layout
 ================================================== */
-#auth-row{
+#auth-row {
   justify-content: space-evenly; /* even horizontal spacing*/
 }
-
+/* ==================================================
+  Section Headings
+  - styles login/register titles
+  - creates centered underline highlight
+================================================== */
 #login-container h2,
-#register-container h2{
+#register-container h2 {
   text-align: center;
   border-bottom: 2px solid #ffd54f; /* accent underline*/
   width: 270px; /*underline width */
@@ -167,7 +171,7 @@
  -centers forms on the page
 ================================================== */
 #login-container form,
-#register-container form{
+#register-container form {
   display: block;
   max-width: 400px;   /* prevent overly wide forms */
   margin: 30px auto;   /* vertical spacing and horizontal centering*/
@@ -176,14 +180,14 @@
   form spacing fix(bootstrap 5 compatability)
 ================================================== */
 #login-container .form-group,
-#register-container .form-group{
+#register-container .form-group {
   margin-bottom: lren;
 }
 
 /* ==================================================
   Primary Auth Button
 ================================================== */
-card-btn{
+.card-btn {
   color: #000;
   background-color: #ffd54f;
   border: 2px solid #ffd54f;
@@ -193,15 +197,16 @@ card-btn{
 
 /* ==================================================
   Button hover effect
+  -ivnverts button style
 ================================================== */
-.card-btn:hover{
+.card-btn:hover {
   background-color: transparent;
   color: #ffd54f;
   border-color: #ffd54f;
   transition: all 0.2s ease-in-out;
 }
 
-@media(max-width: 768px){
+@media(max-width: 768px) {
   #login-container,
   #register-container{
     margin-bottom: 30px;
