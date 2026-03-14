@@ -33,7 +33,7 @@
         <form action="" method="POST">
 
           <!-- Hidden field used to identify form type -->
-          <input type="hidden" name="typ" value="login">
+          <input type="hidden" name="type" value="login">
 
           <!-- Email Field -->
           <div class="form-group">
@@ -70,10 +70,10 @@
         <h2>Create Account</h2>
 
         <!-- Registration Form -->
-        <form action="" method="POST">
+        <form action="<?= $BASE_URL ?>auth_process.php" method="POST">
 
           <!-- Hidden field used to identify form type -->
-          <input type="hidden" name="typ" value="register">
+          <input type="hidden" name="type" value="register">
 
           <!-- Email Field -->
           <div class="form-group">
@@ -82,8 +82,7 @@
                     class="form-control" 
                     id="email" 
                     name="email" 
-                    placeholder="Enter your email"
-                    required>
+                    placeholder="Enter your email">
           </div>
 
           <!-- First Name Field -->
@@ -93,8 +92,7 @@
                     class="form-control" 
                     id="name" 
                     name="name" 
-                    placeholder="Enter your name"
-                    required>
+                    placeholder="Enter your name">
           </div>
 
           <!-- Last Name Field -->
@@ -104,8 +102,7 @@
                     class="form-control" 
                     id="lastname" 
                     name="lastname" 
-                    placeholder="Enter your last name"
-                    required>
+                    placeholder="Enter your last name">
           </div>
 
           <!-- Password Field -->
@@ -115,8 +112,7 @@
                     class="form-control" 
                     id="password" 
                     name="password" 
-                    placeholder="Enter your password"
-                    required>
+                    placeholder="Enter your password">
           </div>
 
           <!-- Password Confirmation Field -->
@@ -126,8 +122,7 @@
                     class="form-control" 
                     id="confirmpassword" 
                     name="confirmpassword" 
-                    placeholder="Confirm your password"
-                    required>
+                    placeholder="Confirm your password">
           </div>
 
           <!-- Submit Button -->
