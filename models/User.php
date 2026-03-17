@@ -1,59 +1,66 @@
 <?php
-
-    /*
-    ========================================
-    USER MODEL
-    - Represents a user entity in the system
+ 
+  /* ======================================
+     USER MODEL
+     - Represents a user entity in the system
      - Stores user-related data from database
      - Used by DAO to create and manipulate users
-    ========================================
-    */
+  ====================================== */
 
-    class User {
+  class User {
+    // Unique user ID (Primary Key)
+    public $id;
 
-  // Unique user ID (Primary Key)
-  public $id;
+    // User first name
+    public $name;
 
-  // User first name
-  public $name;
+    // User last name
+    public $lastname;
 
-  // User last name
-  public $lastname;
+    // User email (used for login)
+    public $email;
 
-  // User email (used for login)
-  public $email;
+    // User password
+    public $password;
 
-  // User password
-  public $password;
+    // Profile image filename/path
+    public $image;
 
-  // Profile image filename/path
-  public $image;
+    // Short biography or description
+    public $bio;
 
-  // Short biography or description
-  public $bio;
+    // Authentication token (used for sessions/login)
+    public $token;
 
-  // Authentication token (used for sessions/login)
-  public $token;
+    // Admin role flag (1 = admin, 0 = regular user)
+    public $is_admin;
 
-  // Admin role flag (1 = admin, 0 = regular user)
-  public $is_admin;
+    // Ban status flag (1 = banned, 0 = active user)
+    public $is_banned;
 
-  // Ban status flag (1 = banned, 0 = active user)
-  public $is_banned;
+    public function generateToken() {
+
+      return bin2hex(random_bytes(50));
 
     }
 
-    /*
-    ========================================
+    public function generatePassword($password) {
+
+      return password_hash($password, PASSWORD_DEFAULT);
+
+    }
+
+  }
+
+
+
+  /* ======================================
      USER DATA ACCESS INTERFACE (DAO)
-     - Defines all database operations
+     - Defines all database operations 
        related to the User entity
      - Forces consistency in UserDAO implementation
-    ========================================
-    */
-
-    interface UserDAOInterface {
-
+  ====================================== */
+  interface UserDAOInterface {
     // Converts database array into a User object
     public function buildUser($data);
 
@@ -62,7 +69,7 @@
     public function create(User $user, $authUser = false);
 
     // Updates existing user information
-    public function update(User $user);
+    public function update(User $user,$redirect = true);
 
     // Verifies if a user token is valid
     // $protected = true blocks access if not authenticated
@@ -70,19 +77,22 @@
 
     // Saves authentication token in session
     // $redirect = true redirects after login
-    public function setTokenToSession($token, $redirect = true);
+    public function setTokenToSession($token, $redirect = true); 
 
     // Authenticates user using email and password
-    public function authenticateUser($email, $password);
+    public function authenticateUser($email, $password); 
 
     // Finds user by email address
-    public function findByEmail($email);
+    public function findByEmail($email); 
 
     // Finds user by ID
-    public function findById($id);
+    public function findById($id); 
 
     // Finds user by authentication token
-    public function findByToken($token);
+    public function findByToken($token); 
+
+    // Removes authentication token (used for logout)
+    public function destroyToken();
 
     // Updates user password (after hashing)
     public function changePassword(User $user);
@@ -92,5 +102,4 @@
 
     // Grants or removes admin privileges
     public function setAdmin(User $user, $isAdmin = true);
-
-    }
+  }
