@@ -54,27 +54,69 @@
         } else {
           
           // Send an error message, user already exists
-          $message->setMessage("User already registered, please try another email.", "error", "back");
+          $message->setMessage(
+            "User already registered, please try another email.",
+            "error",
+            "back"
+          );
 
         }
         
       } else {
 
         // Send an error message saying the passwords don't match
-        $message->setMessage("The passwords are not the same.", "error", "back");
-
+        $message->setMessage(
+          "The passwords are not the same.",
+          "error",
+          "back"
+        );
 
       }
       
     } else {
       
       // Send a missing data error message
-      $message->setMessage("Please fill in all fields.", "error", "back");
+      $message->setMessage(
+        "Please fill in all fields.",
+        "error",
+        "back"
+      );
 
     }
 
 
    
   } else if ($type === "login") {
+
+    $email = filter_input(INPUT_POST, "email");
+    $password = filter_input(INPUT_POST, "password");
+
+    // Attempts to authenticate user
+    if ($userDao->authenticateUser($email, $password)) {
+
+       $message->setMessage(
+          "welcome",
+          "success",
+          "editprofile.php"
+      );
+      
+    // Redirects the user if authentication fails
+    } else {
+      
+      $message->setMessage(
+        "Incorrect username or password.",
+        "error",
+        "back"
+      );
+
+    }
+    
+  } else {
+
+    $message->setMessage(
+      "Invalid information.",
+      "error",
+      "index.php"
+    );
 
   }
