@@ -144,6 +144,13 @@
               <a href="<?= $BASE_URL ?>editprofile.php" class="nav-link bold"><?= $userData->name ?></a>
             </li>
 
+            <!-- Admin Panel link -->
+            <?php if($userData && $userDao->isAdmin($userData)): ?>
+              <li class="nav-item">
+                <a href="<?= $BASE_URL ?>admin.php" class="nav-link">Admin Panel</a>
+              </li>
+            <?php endif; ?>
+
             <li class="nav-item">
               <a href="<?= $BASE_URL ?>logout.php" class="nav-link">Log out</a>
             </li>

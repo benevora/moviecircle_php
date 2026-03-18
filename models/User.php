@@ -69,7 +69,7 @@
     public function create(User $user, $authUser = false);
 
     // Updates existing user information
-    public function update(User $user);
+    public function update(User $user,$redirect = true);
 
     // Verifies if a user token is valid
     // $protected = true blocks access if not authenticated

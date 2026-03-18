@@ -30,7 +30,7 @@
         <h2>Login</h2>
 
         <!-- Login Form -->
-        <form action="" method="POST">
+        <form action="<?= $BASE_URL ?>auth_process.php" method="POST">
 
           <!-- Hidden field used to identify form type -->
           <input type="hidden" name="type" value="login">

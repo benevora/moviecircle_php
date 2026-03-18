@@ -24,6 +24,13 @@
     }
 
 
+
+    /* ======================================
+      BUILD USER
+      - Receives database data (array)
+      - Converts it into a User object
+      - Returns a fully populated User
+    ====================================== */
     public function buildUser($data)
     {
       $user = new User();
@@ -43,6 +50,13 @@
     }
 
 
+
+    /* ======================================
+      CREATE USER
+      - Inserts a new user into database
+      - Stores basic user information
+      - Optionally logs the user in
+    ====================================== */
     public function create(User $user, $authUser = false)
     {
 
@@ -57,7 +71,7 @@
 
       $stmt->execute();
 
-      // authenticate user, if auth is true
+      // Automatically logs in the user after registration
       if ($authUser) 
       {
         $this->setTokenToSession($user->token);
@@ -66,24 +80,55 @@
     }
 
 
-    public function update(User $user)
+
+    /* ======================================
+      UPDATE USER
+      - Updates user data in database
+      - Can update name, email, image, bio, token
+      - Optionally redirects with success message
+    ====================================== */
+    public function update(User $user, $redirect = true)
     {
+      $stmt = $this-> conn->prepare("UPDATE users SET
+        name = :name,
+        lastname = :lastname,
+        email = :email,
+        image = :image,
+        bio = :bio,
+        token = :token
+        WHERE id = :id
+      ");
+
+      $stmt->bindParam(":name", $user->name);
+      $stmt->bindParam(":lastname", $user->lastname);
+      $stmt->bindParam(":email", $user->email);
+      $stmt->bindParam(":image", $user->image);
+      $stmt->bindParam(":bio", $user->bio);
+      $stmt->bindParam(":token", $user->token);
+      $stmt->bindParam(":id", $user->id);
+
+      $stmt->execute();
+
+         if ($redirect) {
+        
+        // Redirects to the user's profile
+        $this->message->setMessage(
+          "Data updated successfully",
+          "success",
+          "editprofile.php"
+        );
+      }
 
     }
 
 
 
-    
     /* ======================================
       TOKEN VERIFICATION
-      - Checks if a user authentication
-      token exists in the session
-      - Validates the token against the
-      database
-      - Returns the authenticated user
-      - If the page is protected and the
-      token is invalid, redirects the
-      user to the homepage
+      - Checks if a session token exists
+      - Validates token against database
+      - Returns authenticated user if valid
+      - Redirects if page is protected
     ====================================== */
     public function verifyToken($protected = false)
     {
@@ -101,7 +146,8 @@
           $this->message->setMessage(
             "Please authenticate to access this page.",
             "error",
-            "index.php");
+            "index.php"
+          );
         }
         
       } else if($protected) {
@@ -109,14 +155,19 @@
           $this->message->setMessage(
             "Please authenticate to access this page.",
             "error",
-            "index.php");
+            "index.php"
+          );
       }
     }
 
 
 
-
-
+    /* ======================================
+      SET TOKEN TO SESSION
+      - Stores authentication token in session
+      - Used to keep user logged in
+      - Optionally redirects after login
+    ====================================== */
     public function setTokenToSession($token, $redirect = true)
     {
       // save token in session
@@ -128,17 +179,58 @@
         $this->message->setMessage(
           "welcome",
           "success",
-          "editprofile.php");
+          "editprofile.php"
+        );
       }
     }
 
 
+
+    /* ======================================
+      AUTHENTICATE USER
+      - Verifies user credentials (email/password)
+      - Generates new session token
+      - Updates user token in database
+      - Returns true if successful
+    ====================================== */
     public function authenticateUser($email, $password)
     {
+      $user = $this->findByEmail($email);
+      
+      if ($user) {
 
+        // check if the passwords match
+        if (password_verify($password, $user->password)) {
+          
+          // Generate a token and insert it into the session
+          $token = $user->generateToken();
+
+          $this->setTokenToSession($token, false);
+
+          // update token for user
+          $user->token = $token;
+
+          $this->update($user, false);
+
+          return true;
+
+        } else {
+          return false;
+        }
+
+      } else {
+        return false;
+      }
     }
 
 
+
+    /* ======================================
+      FIND USER BY EMAIL
+      - Searches user in database by email
+      - Returns User object if found
+      - Returns false if not found
+    ====================================== */
     public function findByEmail($email)
     {
 
@@ -158,25 +250,34 @@
           return $user;
 
         } else {
-
           return false;
-
         }
 
       } else {
-
         return false;
-
       }
     }
 
 
+
+    /* ======================================
+      FIND USER BY ID
+      - 
+      - 
+    ====================================== */
     public function findById($id)
     {
 
     }
 
 
+
+    /* ======================================
+      FIND USER BY TOKEN
+      - Retrieves user using session token
+      - Used for authentication persistence
+      - Returns User object if valid
+    ====================================== */
     public function findByToken($token)
     {
 
@@ -209,41 +310,62 @@
     }
 
 
+
     /* ======================================
       USER LOGOUT
-      - Removes the authentication token
-      stored in the session
-      - Effectively logs the user out
-      - Redirects to homepage with
-      a confirmation message
+      - Removes token from session
+      - Logs user out of the system
+      - Redirects with success message
     ====================================== */
     public function destroyToken()
     {
       // remove token from session
       unset($_SESSION["token"]);
+      // session_destroy();
 
       // Redirect and display a success message
       $this->message->setMessage(
         "You have successfully logged out!",
         "success",
-        "index.php");
+        "index.php"
+      );
     }
 
 
 
-
+    /* ======================================
+      CHANGE PASSWORD
+      - 
+      - 
+    ====================================== */
     public function changePassword(User $user)
     {
 
     }
 
+    
 
+    /* ======================================
+      CHECK ADMIN
+      - Verifies if user has admin privileges
+      - Returns true if admin, false otherwise
+    ====================================== */
     public function isAdmin(User $user)
     {
+      if($user->is_admin == 1){
+        return true;
+      }
 
+      return false;
     }
 
 
+
+    /* ======================================
+      SET ADMIN
+      - 
+      - Should assign or remove admin role
+    ====================================== */
     public function setAdmin(User $user, $isAdmin = true)
     {
       
