@@ -37,6 +37,10 @@
 
     // Ban status flag (1 = banned, 0 = active user)
     public $is_banned;
+  
+    public function getFullName($user){
+      return $user->name . " " . $user->lastname;
+    }
 
     public function generateToken() {
 
