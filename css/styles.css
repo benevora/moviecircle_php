@@ -37,7 +37,6 @@
 
   /* Smooth hover transition */
   transition: filter 0.3s ease;
-  color: #F4C98E;           /* Fallback color */
 }
 
 /* Title hover effect */
@@ -49,6 +48,9 @@
 #main-navbar {
   background-color: #121212; /* Dark theme background */
 }
+
+
+
 
 /* ==================================================
    SEARCH FORM
@@ -69,6 +71,9 @@
   box-shadow: none;
 }
 
+
+
+
 /* ==================================================
    NAVIGATION LINKS
 ================================================== */
@@ -85,7 +90,7 @@
 
 /* Hover highlight effect */
 .navbar-nav .nav-item .nav-link:hover {
-  color: #f5c518;           /* gold highlight */
+  color: #FFD54F;           /* gold highlight */
 }
 
 /* Align nav items to the right */
@@ -98,6 +103,10 @@
 .bold {
   font-weight: bold;
 }
+
+
+
+
 
 /* ==================================================
    FLASH MESSAGES
@@ -135,6 +144,9 @@
 }
 
 
+
+
+
 /* ==================================================
    HOME SECTION
 ================================================== */
@@ -145,39 +157,58 @@
   min-height: 65vh;           /* Minimum viewport height */
   padding: 40px;
 }
+
+
+
+
 /* ==================================================
-  auth layout
+   AUTHENTICATION PAGE STYLES
+   --------------------------------------------------
+   Applies to:
+   - Login form
+   - Registration form
+   - Shared auth UI components
+================================================== */
+
+
+/* ==================================================
+   AUTH LAYOUT
+   - Controls spacing between login and register columns
 ================================================== */
 #auth-row {
-  justify-content: space-evenly; /* even horizontal spacing*/
+  justify-content: space-evenly; /* Even horizontal spacing between forms */
 }
+
+
 /* ==================================================
-  Section Headings
-  - styles login/register titles
-  - creates centered underline highlight
+   SECTION HEADINGS
+   - Styles Login and Register titles
+   - Creates centered underline highlight
 ================================================== */
 #login-container h2,
 #register-container h2 {
-  text-align: center;
-  border-bottom: 2px solid #ffd54f; /* accent underline*/
-  width: 270px; /*underline width */
-  margin: 0 auto;   /* center block horizontally*/
-  padding: 10px;  /*text space*/
-
+  text-align: center;                 /* Center title text */
+  border-bottom: 2px solid #FFD54F; /* Accent underline */
+  width: 270px;                       /* Fixed underline width */
+  margin: 0 auto;                     /* Center block horizontally */
+  padding: 10px;                      /* Space around text */
 }
+
+
 /* ==================================================
- form containers
- -limits form width
- -centers forms on the page
+   FORM CONTAINERS
+   - Limits form width
+   - Centers forms on the page
 ================================================== */
 #login-container form,
 #register-container form {
   display: block;
-  max-width: 400px;   /* prevent overly wide forms */
-  margin: 30px auto;   /* vertical spacing and horizontal centering*/
+  max-width: 400px;   /* Prevent overly wide forms */
+  margin: 30px auto;  /* Vertical spacing + horizontal centering */
 }
+
 /* ==================================================
-  form spacing fix(bootstrap 5 compatability)
+   FORM SPACING FIX (Bootstrap 5 compatibility)
 ================================================== */
 #login-container .form-group,
 #register-container .form-group {
@@ -186,36 +217,58 @@
 
 
 /* ==================================================
-  Primary Auth Button
+   PRIMARY AUTH BUTTON
+   - Used for Login and Register submit buttons
 ================================================== */
 .card-btn {
   color: #000;
-  background-color: #ffd54f;
-  border: 2px solid #ffd54f;
-  width:  100%;
+  background-color: #FFD54F;
+  border: 2px solid #FFD54F;
+  width: 100%;
 }
 
 
 /* ==================================================
-  Button hover effect
-  -ivnverts button style
+   BUTTON HOVER EFFECT
+   - Inverts button style for interactivity
 ================================================== */
 .card-btn:hover {
   background-color: transparent;
-  color: #ffd54f;
-  border-color: #ffd54f;
+  color: #FFD54F;
+  border-color: #FFD54F;
   transition: all 0.2s ease-in-out;
 }
 
-@media(max-width: 768px) {
+
+@media (max-width: 768px) {
   #login-container,
-  #register-container{
+  #register-container {
     margin-bottom: 30px;
   }
 }
 
+#login-container form,
+#register-container form {
+  background-color: #121212;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  background: linear-gradient(145deg, #1a1a1a, #111);
+  border: 1px solid #2a2a2a;
+}
 
+#login-container input,
+#register-container input {
+  border-radius: 8px;
+  padding: 12px;
+}
 
+#login-container .btn,
+#register-container .btn {
+  border: 1px solid #FFD54F;
+  border-radius: 8px;
+  padding: 12px;
+}
 
 /* ==================================================
   EDIT PROFILE
@@ -225,9 +278,11 @@
   margin: 0 auto;
 }
 
+
 /* ==========================
    EDIT PROFILE CARDS
 ========================== */
+
 .edit-profile-page .col-md-6 {
   padding: 0 20px;
 }
@@ -245,6 +300,7 @@
 .edit-profile-page form + form {
   margin-top: 30px;
 }
+
 
 .edit-profile-page h1 {
   margin-bottom: 10px;
@@ -282,9 +338,11 @@
   color: #999;
 }
 
+
 #bio {
   max-width: 400px;
 }
+
 
 .disabled {
   background-color: #BBB;
@@ -292,10 +350,12 @@
   opacity: 0.8;
 }
 
+
 .edit-profile-page .card-btn {
   width: 100%;
   max-width: 200px;
 }
+
 
 .edit-profile-page input[type="file"] {
   width: 100%;
@@ -314,6 +374,111 @@
 }
 
 
+
+
+
+/* ==================================================
+  NEW MOVIE
+================================================== */
+.new-movie-container {
+  text-align: center;
+}
+
+#add-movie-form {
+  text-align: left;
+}
+
+.new-movie-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 30px;
+  background: linear-gradient(145deg, #1a1a1a, #111);
+  border-radius: 12px;
+  border: 1px solid #2a2a2a;
+}
+
+#add-movie-form .form-group {
+  margin-bottom: 20px;
+}
+
+#trailer {
+  width: 100%;
+}
+
+.page-title:after {
+  width: 100%;
+  max-width: 100%;
+  content: "";
+  width: 50%;
+  max-width: 300px;
+  border-bottom: 2px solid #F5C518;
+  display: block;
+  margin: 0 auto;
+  padding-top: 7px;
+}
+
+#add-movie-form input[type="file"] {
+  width: 100%;
+  max-width: 100%;
+  background-color: #1c1c1c;
+  color: #ccc;
+  border: 1px solid #333;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+#add-movie-form select {
+  background-color: #1c1c1c;
+  color: #fff;
+  border: 1px solid #2f2f2f;
+}
+
+#add-movie-form select:focus {
+  border-color: #FFD54F; /* your gold */
+  box-shadow: 0 0 5px rgba(255, 213, 79, 0.5);
+  outline: none;
+}
+
+#add-movie-form select {
+  appearance: auto;
+  -webkit-appearance: auto;
+  -moz-appearance: auto;
+  border: 1px solid #2f2f2f;
+  border-radius: 8px;
+  padding: 10px;
+  color: #fff;
+}
+
+#add-movie-form input,
+#add-movie-form textarea {
+  border: 1px solid #2f2f2f;
+  border-radius: 8px;
+  padding: 10px;
+  color: #000;
+}
+
+
+#add-movie-form .btn {
+  border: 1px solid #FFD54F;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+#add-movie-form .card-btn:hover {
+  background-color: transparent;
+  color: #FFD54F;
+  border-color: #FFD54F;
+  transition: all 0.2s ease-in-out;
+}
+
+@media (max-width: 768px) {
+  .new-movie-container{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+}
 
 /* ==================================================
   FOOTER
