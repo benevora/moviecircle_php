@@ -25,6 +25,7 @@
 
 
 
+
     /* ======================================
       BUILD USER
       - Receives database data (array)
@@ -48,6 +49,7 @@
 
       return $user;
     }
+
 
 
 
@@ -78,6 +80,7 @@
       }
 
     }
+
 
 
 
@@ -123,6 +126,7 @@
 
 
 
+    
     /* ======================================
       TOKEN VERIFICATION
       - Checks if a session token exists
@@ -162,6 +166,7 @@
 
 
 
+
     /* ======================================
       SET TOKEN TO SESSION
       - Stores authentication token in session
@@ -183,6 +188,8 @@
         );
       }
     }
+
+
 
 
 
@@ -209,7 +216,6 @@
 
           // update token for user
           $user->token = $token;
-
           $this->update($user, false);
 
           return true;
@@ -222,6 +228,7 @@
         return false;
       }
     }
+
 
 
 
@@ -260,6 +267,7 @@
 
 
 
+
     /* ======================================
       FIND USER BY ID
       - 
@@ -269,6 +277,8 @@
     {
 
     }
+
+
 
 
 
@@ -310,8 +320,7 @@
     }
 
 
-
-    /* ======================================
+     /* ======================================
       USER LOGOUT
       - Removes token from session
       - Logs user out of the system
@@ -340,10 +349,24 @@
     ====================================== */
     public function changePassword(User $user)
     {
+      $stmt = $this->conn->prepare("UPDATE users 
+        SET password = :password
+        WHERE id = :id
+      ");
 
+      $stmt->bindParam(":password", $user->password);
+      $stmt->bindParam(":id", $user->id);
+
+      $stmt->execute();
+
+      // Redirect and display a success message
+      $this->message->setMessage(
+        "Password changed successfully.",
+        "success",
+        "editprofile.php"
+      );
     }
 
-    
 
     /* ======================================
       CHECK ADMIN
