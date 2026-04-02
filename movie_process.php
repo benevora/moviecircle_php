@@ -92,6 +92,36 @@
       );
     }
 
+  } elseif ($type === "delete") {
+
+    // receive the form data
+    $id = filter_input(INPUT_POST, "id");
+
+    $movie = $movieDao->findById($id);
+
+    if ($movie) {
+      
+      // check if the movie belongs to the user
+      if ($movie->users_id === $userData->id) {
+        
+        $movieDao->destroy($movie->id);
+      } else {
+          $message->setMessage(
+            "Invalid information.",
+            "error",
+            "index.php"
+          );
+      }
+      
+    } else {
+        $message->setMessage(
+          "Invalid information.",
+          "error",
+          "index.php"
+        );
+    }
+    
+
   } else {
 
     $message->setMessage(
