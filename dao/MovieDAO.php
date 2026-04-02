@@ -47,21 +47,94 @@
 
 
     public function getLatestMovies(){
+      
+      $movies = [];
 
+      $stmt = $this->conn->query("SELECT * FROM movies ORDER BY id DESC");
+
+      $stmt->execute();
+
+      if ($stmt->rowCount() > 0) {
+        
+        $moviesArray = $stmt->fetchAll();
+
+        foreach($moviesArray as $movie) {
+          $movies[] = $this->buildMovie($movie);
+        }
+      }
+
+      return $movies;
     }
 
 
     public function getMoviesByCategory($category){
+      $movies = [];
 
+      $stmt = $this->conn->prepare("SELECT * FROM movies
+                                    WHERE category = :category
+                                    ORDER BY id DESC");
+
+      $stmt->bindParam(":category", $category);
+
+      $stmt->execute();
+
+      if ($stmt->rowCount() > 0) {
+        
+        $moviesArray = $stmt->fetchAll();
+
+        foreach($moviesArray as $movie) {
+          $movies[] = $this->buildMovie($movie);
+        }
+      }
+
+      return $movies;
     }
 
 
-    public function getMoviesByUserID($id){
+    public function getMoviesByUserId($id){
+      $movies = [];
 
+      $stmt = $this->conn->prepare("SELECT * FROM movies
+                                    WHERE users_id = :users_id");
+
+      $stmt->bindParam(":users_id", $id);
+
+      $stmt->execute();
+
+      if ($stmt->rowCount() > 0) {
+        
+        $moviesArray = $stmt->fetchAll();
+
+        foreach($moviesArray as $movie) {
+          $movies[] = $this->buildMovie($movie);
+        }
+      }
+
+      return $movies;
     }
 
 
     public function findById($id){
+      $movie = [];
+
+      $stmt = $this->conn->prepare("SELECT * FROM movies
+                                    WHERE id = :id");
+
+      $stmt->bindParam(":id", $id);
+
+      $stmt->execute();
+
+      if ($stmt->rowCount() > 0) {
+        
+        $movieData = $stmt->fetch();
+
+        $movie = $this->buildMovie($movieData);
+
+        return $movie;
+
+      } else {
+        return false;
+      }
 
     }
 
@@ -89,7 +162,7 @@
 
       $stmt->execute();
 
-      // Redirects to the home page
+      // Message of success by adding film
       $this->message->setMessage(
         "Movie added successfully.",
         "success",
@@ -105,5 +178,17 @@
 
     public function destroy($id){
 
+      $stmt = $this->conn->prepare("DELETE FROM movies WHERE id = :id");
+
+      $stmt->bindParam(":id", $id);
+
+      $stmt->execute();
+
+       // Message of success for removing film
+      $this->message->setMessage(
+        "Movie successfully removed.",
+        "success",
+        "dashboard.php"
+      );
     }
   }

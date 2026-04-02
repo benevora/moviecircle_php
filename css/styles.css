@@ -11,7 +11,7 @@
   display: flex;            /* Align logo and title horizontally */
   align-items: flex-end;    /* Align title to bottom of logo */
   gap: 10px;                /* Space between logo and text */
-  margin-left: 15px;        /* Space from left edge */
+  margin-left: 50px;        /* Space from left edge */
 }
 
 /* Logo size */
@@ -59,16 +59,18 @@
 #search-form {
   display: flex;
   background-color: #FFF;
-  border-radius: 5px;
-  max-width: 400px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 500px;
   margin: 0 20px;
 }
 
 /* Search input customization */
 #search-form .form-control {
-   border: none;
+  border: none;
   flex: 1;
   box-shadow: none;
+  border-radius: 20px;
 }
 
 
@@ -97,6 +99,7 @@
 .navbar-nav {
   justify-content: flex-end;
   width: 100%;
+  margin-right: 50px;
 }
 
 /* Utility class */
@@ -146,20 +149,130 @@
 
 
 
-
 /* ==================================================
    HOME SECTION
 ================================================== */
+body {
+  background-color: #000;
+}
 
-#main-container {           
+#main-container {         
   background-color: #000;   /* Black background */
   color: #FFF;              /* White Text */
   min-height: 65vh;           /* Minimum viewport height */
   padding: 40px;
+
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-family: 24px;
+  border-left: 4px solid #FFD54F;
+  padding-left: 12px;
+  margin-top: 20px;
+}
+
+.section-description {
+  color: #ccc;
+  font-size: 18px;
+}
+
+.movies-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px; 
+}
+
+.movie-card {
+  background-color: #1a1a1a;
+  width: 100%;
+  max-width: 180px;
+  margin: 0;
+  margin-bottom: 30px;
+ 
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  background: linear-gradient(145deg, #1a1a1a, #111);
+  border: 1px solid #2a2a2a;
+}
+
+.movie-card .card-img-top {
+  height: 250px;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
 }
 
 
+.movie-card {
+  transition: transform 0.2s ease;
+}
 
+.movie-card:hover {
+  transform: scale(1.05);
+}
+
+
+/* Tablet */
+@media (max-width: 992px) {
+  .movie-card {
+    max-width: 160px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .movie-card {
+    max-width: 140px;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .movie-card {
+    max-width: 90%;
+  }
+}
+
+
+.card-title {
+  height: 3rem;
+}
+
+.card-title a {
+  font-size: 16px;
+  color: #FFF;
+}
+
+.fas.fa-star {
+  color: #FFD54F;
+}
+
+.rating {
+  color: #ccc;
+}
+
+.rate-btn {
+  margin-bottom: 15px;
+  color: #5799EF;
+  background-color: #333;
+  border-color: #333;
+  width: 100%;
+  font-weight: bold;
+}
+
+.rate-btn:hover {
+  background-color: #444;
+  border-color: #444;
+}
+
+.empty-list {
+  text-align: center;
+  font-size: 18px;
+  width: 100%;
+  font-weight: bold;
+}
 
 /* ==================================================
    AUTHENTICATION PAGE STYLES
@@ -310,7 +423,8 @@
   margin-bottom: 25px;
 }
 
-#profile-image-container {
+#profile-image-container, 
+.profile-image-container {
   width: 140px;
   height: 140px;
   margin: 0 auto;
@@ -319,6 +433,11 @@
   background-position: center;
   border: 3px solid #f4c542;
   margin-bottom: 20px;
+}
+
+.profile-image-container {
+  width: 70px;
+  height: 70px;
 }
 
 #profile-image-container:hover {
@@ -351,7 +470,9 @@
 }
 
 
-.edit-profile-page .card-btn {
+.edit-profile-page .card-btn, 
+#add-movie-container .card-btn,
+#review-form .card-btn {
   width: 100%;
   max-width: 200px;
 }
@@ -372,6 +493,7 @@
   padding: 12px;
   transition: all 0.2s ease;
 }
+
 
 
 
@@ -479,6 +601,259 @@
     margin-bottom: 20px;
   }
 }
+
+
+/* ==================================================
+  MOVIE
+================================================== */
+.movie-container {
+  text-align: center;
+}
+
+.movie-details {
+  margin: 25px 0;
+}
+
+.pipe {
+  border: 1px solid #333;
+  margin: 0 10px;
+}
+
+.trailer-container {
+  margin-top: auto; /* pushes trailer to the bottom */
+}
+
+.trailer-container {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.trailer-container iframe {
+  width: 100%;
+  height: 330px; /* same as poster */
+  border-radius: 6px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  background: linear-gradient(145deg, #1a1a1a, #111);
+  border: 1px solid #2a2a2a;
+}
+
+.movie-page-image {
+  width: 220px;
+  height: 330px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  background: linear-gradient(145deg, #1a1a1a, #111);
+  border: 1px solid #2a2a2a;
+  align-self: flex-end; /* aligns to bottom of the container */
+}
+
+#movie-description {
+  display: inline-block;
+  vertical-align: bottom;
+  margin: 0;
+  margin-right: 10px; 
+}
+
+.movie-description-box {
+  display: inline-block;
+  max-width: calc(100% - 120px);
+}
+
+#reviews-title {
+  margin-bottom: 25px;
+}
+
+#review-form-container {
+  background-color: #333;
+  padding: 20px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  background: linear-gradient(145deg, #1a1a1a, #111);
+  border: 1px solid #2a2a2a;
+}
+
+#review-form-container select, 
+#review-form-container textarea {
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 15px;
+}
+
+
+#review-form select {
+  appearance: auto;
+  -webkit-appearance: auto;
+  -moz-appearance: auto;
+  border: 1px solid #2f2f2f;
+  border-radius: 8px;
+  padding: 10px;
+  color: #111;
+}
+
+#reviews-container {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 4px solid #FFD54F;
+}
+
+.review {
+  margin-bottom: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid #333;
+}
+
+.review-image {
+  margin-top: 15px;
+}
+
+.author-details-container {
+  padding-top: 20px;
+}
+
+.author-name a {
+  color: #FFD54F;
+  text-decoration: none;
+}
+
+.comment-title {
+  color: #999;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+
+
+
+
+
+/* ==================================================
+  DASHBOARD
+================================================== */
+#add-movie-container {
+  text-align: right;
+}
+
+#add-movie-container .card-btn {
+  width: auto;          
+  max-width: 200px;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+#movies-dashboard .table.table {
+  background: linear-gradient(145deg, #1a1a1a, #111);
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  border: 1px solid #2a2a2a;
+  color: #FFF;
+}
+
+#movies-dashboard table th {
+  background-color: #111;      
+  font-weight: bold;
+  border-bottom: 3px solid #FFD54F; 
+  color: #FFD54F;
+}
+
+#movies-dashboard  td {
+  background-color: #1a1a1a;      
+  font-weight: bold;
+  color: #FFF;
+}
+
+.rating-number {
+  color: #FFF;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+#movies-dashboard .table-movie-title {
+  color: #FFF;             
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+#movies-dashboard td .star-rate {
+  color: #ccc;             
+  font-weight: bold;
+  text-decoration: none;
+}
+
+#movies-dashboard .table-movie-title:hover {
+  color: #FFD54F;
+}
+
+#movies-dashboard .table th {
+  border-top: none;
+}
+
+#movies-dashboard .table tr {
+  padding: 15px 0;
+}
+
+.actions-column {
+  max-width: 75px;
+  text-align: center;
+}
+
+.actions-column form{
+  display: inline-block;
+}
+
+.edit-btn {
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin: 0 5px;
+  font-weight: bold;
+  transition: .3s ease;
+  border: none;
+  cursor: pointer;
+  background-color: #5799EF;
+  color: #FFF;
+}
+
+.edit-btn:hover {
+  background-color: transparent;
+  color: #5799EF;
+  text-decoration: none;
+}
+
+.delete-btn {
+  padding: 2px 8px;
+  border-radius: 5px;
+  margin: 0 5px;
+  font-weight: bold;
+  transition: .3s ease;
+  border: none;
+  cursor: pointer;
+  background-color: #FF4C4C;
+  color: #FFF;
+}
+
+.delete-btn:hover {
+  background-color: transparent;
+  color: #FF4C4C;
+  text-decoration: none;
+}
+
+/* Responsive for small screens */
+@media (max-width: 768px) {
+  #movies-dashboard table th,
+  #movies-dashboard td {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+
+  .edit-btn,
+  .delete-btn {
+    padding: 4px 6px;
+    font-size: 12px;
+  }
+}
+
+
+
 
 /* ==================================================
   FOOTER
