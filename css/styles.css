@@ -8,15 +8,15 @@
 
 /* Logo + Title container */
 .navbar-brand {
-  display: flex;            /* Align logo and title horizontally */
-  align-items: flex-end;    /* Align title to bottom of logo */
-  gap: 10px;                /* Space between logo and text */
-  margin-left: 50px;        /* Space from left edge */
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  margin-left: 50px;
 }
 
 /* Logo size */
 #logo {
-  width: 40px;              /* Fixed logo width */
+  width: 40px;
 }
 
 /* Project title styling */
@@ -24,7 +24,7 @@
   position: relative;
   font-size: 30px;
   font-weight: bold;
-  margin-bottom: -5px;      /* Align adjustment */
+  margin-bottom: -5px;
 
   /* Gold gradient text effect */
   background: linear-gradient(to right, #F4C98E, #8E7553);
@@ -41,12 +41,12 @@
 
 /* Title hover effect */
 #moviecircle-title:hover {
-  filter: brightness(1.2);  /* Slight brightness increase */
+  filter: brightness(1.2);
 }
 
 /* Navbar background */
 #main-navbar {
-  background-color: #121212; /* Dark theme background */
+  background-color: #121212; 
 }
 
 
@@ -92,7 +92,7 @@
 
 /* Hover highlight effect */
 .navbar-nav .nav-item .nav-link:hover {
-  color: #FFD54F;           /* gold highlight */
+  color: #FFD54F;
 }
 
 /* Align nav items to the right */
@@ -119,17 +119,17 @@
 
 /* Flash message wrapper */
 .msg-container {
-  background-color: #000;   /* Matches site dark theme */
+  background-color: #000;
   padding: 15px;
 }
 
 /* Base message box */
 .msg {
-  width: 60%;                 /* Centered fixed width */
-  margin: 0 auto;             /* Horizontal centering */
+  width: 60%;
+  margin: 0 auto;
   padding: 10px;
   text-align: center;
-  border-radius: 5px;         /* Slight rounded corners */
+  border-radius: 5px;
 }
 
 /* Error message style */
@@ -157,9 +157,9 @@ body {
 }
 
 #main-container {         
-  background-color: #000;   /* Black background */
-  color: #FFF;              /* White Text */
-  min-height: 65vh;           /* Minimum viewport height */
+  background-color: #000;
+  color: #FFF;
+  min-height: 65vh;
   padding: 40px;
 
   max-width: 1200px;
@@ -190,6 +190,7 @@ body {
   max-width: 180px;
   margin: 0;
   margin-bottom: 30px;
+  
  
   border-radius: 12px;
   box-shadow: 0 0 15px rgba(0,0,0,0.5);
@@ -198,8 +199,8 @@ body {
 }
 
 .movie-card .card-img-top {
-  height: 250px;
   width: 100%;
+  aspect-ratio: 2 / 3;
   background-size: cover;
   background-position: center;
 }
@@ -235,7 +236,6 @@ body {
   }
 }
 
-
 .card-title {
   height: 3rem;
 }
@@ -243,6 +243,7 @@ body {
 .card-title a {
   font-size: 16px;
   color: #FFF;
+  text-decoration: none;
 }
 
 .fas.fa-star {
@@ -276,92 +277,35 @@ body {
 
 /* ==================================================
    AUTHENTICATION PAGE STYLES
-   --------------------------------------------------
-   Applies to:
-   - Login form
-   - Registration form
-   - Shared auth UI components
 ================================================== */
 
-
-/* ==================================================
-   AUTH LAYOUT
-   - Controls spacing between login and register columns
-================================================== */
 #auth-row {
-  justify-content: space-evenly; /* Even horizontal spacing between forms */
+  justify-content: space-evenly;
+}
+
+#login-container {
+  width: 500px;
+}
+
+#register-container {
+  width: 600px;
 }
 
 
-/* ==================================================
-   SECTION HEADINGS
-   - Styles Login and Register titles
-   - Creates centered underline highlight
-================================================== */
 #login-container h2,
 #register-container h2 {
-  text-align: center;                 /* Center title text */
-  border-bottom: 2px solid #FFD54F; /* Accent underline */
-  width: 270px;                       /* Fixed underline width */
-  margin: 0 auto;                     /* Center block horizontally */
-  padding: 10px;                      /* Space around text */
+  text-align: center;
+  border-bottom: 2px solid #FFD54F;
+  width: 270px;
+  margin: 0 auto;
+  padding: 10px;
 }
 
-
-/* ==================================================
-   FORM CONTAINERS
-   - Limits form width
-   - Centers forms on the page
-================================================== */
 #login-container form,
 #register-container form {
   display: block;
-  max-width: 500px;   /* Prevent overly wide forms */
-  margin: 30px auto;  /* Vertical spacing + horizontal centering */
-}
-
-/* ==================================================
-   FORM SPACING FIX (Bootstrap 5 compatibility)
-================================================== */
-#login-container .form-group,
-#register-container .form-group {
-  margin-bottom: 1rem;
-}
-
-
-/* ==================================================
-   PRIMARY AUTH BUTTON
-   - Used for Login and Register submit buttons
-================================================== */
-.card-btn {
-  color: #000;
-  background-color: #FFD54F;
-  border: 2px solid #FFD54F;
-  width: 100%;
-}
-
-
-/* ==================================================
-   BUTTON HOVER EFFECT
-   - Inverts button style for interactivity
-================================================== */
-.card-btn:hover {
-  background-color: transparent;
-  color: #FFD54F;
-  border-color: #FFD54F;
-  transition: all 0.2s ease-in-out;
-}
-
-
-@media (max-width: 768px) {
-  #login-container,
-  #register-container {
-    margin-bottom: 30px;
-  }
-}
-
-#login-container form,
-#register-container form {
+  max-width: 500px;
+  margin: 30px auto;
   background-color: #121212;
   padding: 25px;
   border-radius: 12px;
@@ -369,6 +313,26 @@ body {
   background: linear-gradient(145deg, #1a1a1a, #111);
   border: 1px solid #2a2a2a;
 }
+
+#login-container .form-group,
+#register-container .form-group {
+  margin-bottom: 1rem;
+}
+
+.card-btn {
+  color: #000;
+  background-color: #FFD54F;
+  border: 2px solid #FFD54F;
+  width: 100%;
+}
+
+.card-btn:hover {
+  background-color: transparent;
+  color: #FFD54F;
+  border-color: #FFD54F;
+  transition: all 0.2s ease-in-out;
+}
+
 
 #login-container input,
 #register-container input {
@@ -383,6 +347,15 @@ body {
   padding: 12px;
 }
 
+@media (max-width: 768px) {
+  #login-container,
+  #register-container {
+    margin-bottom: 30px;
+  }
+}
+
+
+
 /* ==================================================
   EDIT PROFILE
 ================================================== */
@@ -392,9 +365,7 @@ body {
 }
 
 
-/* ==========================
-   EDIT PROFILE CARDS
-========================== */
+/* EDIT PROFILE CARDS */
 
 .edit-profile-page .col-md-6 {
   padding: 0 20px;
@@ -472,7 +443,8 @@ body {
 
 .edit-profile-page .card-btn, 
 #add-movie-container .card-btn,
-#review-form .card-btn {
+#review-form .card-btn, 
+#edit-movie-form .card-btn {
   width: 100%;
   max-width: 200px;
 }
@@ -495,8 +467,56 @@ body {
 }
 
 
+/* ==================================================
+  USER PROFILE
+================================================== */
+.profile-container {
+  justify-content: center;
+}
 
+.profile-container .profile-image {
+  margin: 20px auto;
+}
 
+.about-title {
+  color: #ccc;
+}
+
+.profile-description {
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+.added-movies-container,
+.about-container {
+  padding-top: 20px;
+}
+
+.about-container {
+  text-align: center;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  background: linear-gradient(145deg, #1a1a1a, #111);
+  border: 1px solid #2a2a2a;
+  border-bottom: 3px solid #ccc;
+}
+
+.added-movies-container {
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  background: linear-gradient(145deg, #1a1a1a, #111);
+  border: 1px solid #2a2a2a;
+}
+
+.added-movies-container .movies-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+}
+
+.added-movies-container .movie-card {
+  flex: 0 1 calc(33.333% - 20px);
+  max-width: calc(33.333% - 20px);
+}
 
 
 /* ==================================================
@@ -638,14 +658,14 @@ body {
 }
 
 .movie-page-image {
-  width: 220px;
-  height: 330px;
-  object-fit: cover;
+  width: 100%;        /* fill the container width */
+  max-width: 220px;   /* optional fixed maximum */
+  height: auto;       /* scale height automatically */
+  object-fit: contain; /* show full image without cropping */
   border-radius: 8px;
   box-shadow: 0 0 15px rgba(0,0,0,0.5);
   background: linear-gradient(145deg, #1a1a1a, #111);
   border: 1px solid #2a2a2a;
-  align-self: flex-end; /* aligns to bottom of the container */
 }
 
 #movie-description {
@@ -740,6 +760,10 @@ body {
   display: inline-block;
 }
 
+#movies-dashboard table {
+  width: 100%;
+}
+
 #movies-dashboard .table.table {
   background: linear-gradient(145deg, #1a1a1a, #111);
   border-radius: 12px;
@@ -774,6 +798,17 @@ body {
   transition: color 0.3s ease;
 }
 
+.movie-title-cell {
+  max-width: 250px;
+}
+
+.table-movie-title {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 #movies-dashboard td .star-rate {
   color: #ccc;             
   font-weight: bold;
@@ -792,17 +827,37 @@ body {
   padding: 15px 0;
 }
 
-.actions-column {
-  max-width: 75px;
-  text-align: center;
+.action-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
 }
 
+.action-buttons form {
+  margin: 0;
+  display: inline;
+}
+
+.actions-column {
+  width: 120px;     
+  white-space: nowrap; 
+  text-align: center
+}
+
+
+
+.movie-title-cell {
+  max-width: 250px;
+}
+
+
 .actions-column form{
-  display: inline-block;
+  display: inline;
 }
 
 .edit-btn {
-  padding: 5px 10px;
+  padding: 1px 6px;
   border-radius: 5px;
   margin: 0 5px;
   font-weight: bold;
@@ -811,6 +866,7 @@ body {
   cursor: pointer;
   background-color: #5799EF;
   color: #FFF;
+  text-decoration: none;
 }
 
 .edit-btn:hover {
@@ -820,7 +876,7 @@ body {
 }
 
 .delete-btn {
-  padding: 2px 8px;
+  padding: 1px 6px;
   border-radius: 5px;
   margin: 0 5px;
   font-weight: bold;
@@ -852,7 +908,163 @@ body {
   }
 }
 
+@media (max-width: 576px) {
+  .edit-btn span,
+  .delete-btn span {
+    display: none;
+  }
+}
 
+
+
+
+
+
+
+
+/* ==================================================
+  EDIT MOVIE PAGE
+================================================== */
+
+/* Main container adjustments */
+#main-container {
+  background-color: #000;
+  color: #FFF;
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Page title and description */
+#main-container h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+page-description {
+  font-size: 16px;
+  color: #ccc;
+  margin-bottom: 30px;
+}
+
+/* Form and image row */
+#edit-movie-form-row {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+/* Form column */
+#edit-movie-form {
+  flex: 1 1 400px; /* Grow, shrink, base width */
+  background: linear-gradient(145deg, #1a1a1a, #111);
+  border: 1px solid #2a2a2a;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+}
+
+/* Form group spacing */
+#edit-movie-form .form-group {
+  margin-bottom: 20px;
+}
+
+#edit-movie-form label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 8px;
+}
+
+
+/* Inputs and textarea */
+
+#edit-movie-form input[type="url"],
+#edit-movie-form input[type="file"] {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #2f2f2f;
+  background-color: #1c1c1c;
+  color: #FFF;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+#edit-movie-form input:focus,
+#edit-movie-form select:focus,
+#edit-movie-form textarea:focus {
+  border-color: #FFD54F;
+  box-shadow: 0 0 5px rgba(255, 213, 79, 0.5);
+  outline: none;
+}
+
+
+/* Submit button */
+#edit-movie-form .card-btn {
+  background-color: #FFD54F;
+  color: #000;
+  border: 2px solid #FFD54F;
+  border-radius: 8px;
+  padding: 12px;
+  font-weight: bold;
+  width: 100%;
+  transition: all 0.2s ease;
+}
+
+#edit-movie-form .card-btn:hover {
+  background-color: transparent;
+  color: #FFD54F;
+  border-color: #FFD54F;
+}
+
+
+/* Image column */
+#edit-movie-image {
+  flex: 0 0 220px; /* fixed width */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+#edit-movie-image img {
+  width: 100%;
+  height: auto; /* preserve aspect ratio */
+  max-height: 400px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  border: 1px solid #2a2a2a;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  #edit-movie-form-row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #edit-movie-form,
+  #edit-movie-image {
+    flex: 1 1 100%;
+  }
+
+  #edit-movie-image img {
+    max-width: 300px;
+    max-height: 350px;
+  }
+}
+
+@media (max-width: 576px) {
+  #edit-movie-form {
+    padding: 20px;
+  }
+
+  #edit-movie-form input,
+  #edit-movie-form select,
+  #edit-movie-form textarea {
+    font-size: 14px;
+  }
+}
 
 
 /* ==================================================
