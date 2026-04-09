@@ -8,15 +8,15 @@
 
 /* Logo + Title container */
 .navbar-brand {
-  display: flex;
-  align-items: flex-end;
-  gap: 10px;
-  margin-left: 50px;
+  display: flex;            /* Align logo and title horizontally */
+  align-items: flex-end;    /* Align title to bottom of logo */
+  gap: 10px;                /* Space between logo and text */
+  margin-left: 50px;        /* Space from left edge */
 }
 
 /* Logo size */
 #logo {
-  width: 40px;
+  width: 40px;              /* Fixed logo width */
 }
 
 /* Project title styling */
@@ -24,7 +24,7 @@
   position: relative;
   font-size: 30px;
   font-weight: bold;
-  margin-bottom: -5px;
+  margin-bottom: -5px;      /* Align adjustment */
 
   /* Gold gradient text effect */
   background: linear-gradient(to right, #F4C98E, #8E7553);
@@ -41,12 +41,12 @@
 
 /* Title hover effect */
 #moviecircle-title:hover {
-  filter: brightness(1.2);
+  filter: brightness(1.2);  /* Slight brightness increase */
 }
 
 /* Navbar background */
 #main-navbar {
-  background-color: #121212; 
+  background-color: #121212; /* Dark theme background */
 }
 
 
@@ -92,7 +92,7 @@
 
 /* Hover highlight effect */
 .navbar-nav .nav-item .nav-link:hover {
-  color: #FFD54F;
+  color: #FFD54F;           /* gold highlight */
 }
 
 /* Align nav items to the right */
@@ -119,17 +119,17 @@
 
 /* Flash message wrapper */
 .msg-container {
-  background-color: #000;
+  background-color: #000;   /* Matches site dark theme */
   padding: 15px;
 }
 
 /* Base message box */
 .msg {
-  width: 60%;
-  margin: 0 auto;
+  width: 60%;                 /* Centered fixed width */
+  margin: 0 auto;             /* Horizontal centering */
   padding: 10px;
   text-align: center;
-  border-radius: 5px;
+  border-radius: 5px;         /* Slight rounded corners */
 }
 
 /* Error message style */
@@ -157,11 +157,10 @@ body {
 }
 
 #main-container {         
-  background-color: #000;
-  color: #FFF;
-  min-height: 65vh;
+  background-color: #000;   /* Black background */
+  color: #FFF;              /* White Text */
+  min-height: 65vh;           /* Minimum viewport height */
   padding: 40px;
-
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -181,7 +180,8 @@ body {
 .movies-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 30px; 
+  gap: 20px;
+  justify-content: flex-start;
 }
 
 .movie-card {
@@ -191,12 +191,16 @@ body {
   margin: 0;
   margin-bottom: 30px;
   
- 
+  flex: 0 1 calc((100% - 100px) / 6);
+  max-width: calc((100% - 100px) / 6);
+
+
   border-radius: 12px;
   box-shadow: 0 0 15px rgba(0,0,0,0.5);
   background: linear-gradient(145deg, #1a1a1a, #111);
   border: 1px solid #2a2a2a;
 }
+
 
 .movie-card .card-img-top {
   width: 100%;
@@ -204,7 +208,6 @@ body {
   background-size: cover;
   background-position: center;
 }
-
 
 .movie-card {
   transition: transform 0.2s ease;
@@ -214,37 +217,40 @@ body {
   transform: scale(1.05);
 }
 
-
-/* Tablet */
-@media (max-width: 992px) {
-  .movie-card {
-    max-width: 160px;
-  }
+.movie-card .card-body .card-btn {
+  display: block;
+  width: 100%;
+  white-space: normal;     
+  word-break: break-word;
+  text-align: center;
 }
 
-/* Mobile */
-@media (max-width: 768px) {
-  .movie-card {
-    max-width: 140px;
-  }
+
+/* Movie card title - responsive font size */
+.movie-card .card-title a {
+  display: block;
+  margin-bottom: 10px;
+  font-size: clamp(12px, 2vw, 16px);
+  line-height: 1.2;
+  white-space: normal;
+  overflow-wrap: break-word;
+  color: #FFF;
+  text-decoration: none;
 }
 
-/* Small phones */
-@media (max-width: 480px) {
-  .movie-card {
-    max-width: 90%;
-  }
+/* Buttons stay full width and stacked */
+.movie-card .card-body .btn {
+  display: block;
+  width: 100%;
+  margin-bottom: 8px;
+  font-size: clamp(12px, 1.5vw, 14px); 
+  padding: 8px 12px;
 }
 
 .card-title {
   height: 3rem;
 }
 
-.card-title a {
-  font-size: 16px;
-  color: #FFF;
-  text-decoration: none;
-}
 
 .fas.fa-star {
   color: #FFD54F;
@@ -275,50 +281,91 @@ body {
   font-weight: bold;
 }
 
+
+
+
+
+@media (max-width: 1200px) {
+  .movie-card {
+    flex: 0 1 calc((100% - 80px) / 5);
+    max-width: calc((100% - 80px) / 5);
+  }
+}
+
+@media (max-width: 992px) {
+  .movie-card {
+    flex: 0 1 calc((100% - 60px) / 4);
+    max-width: calc((100% - 60px) / 4);
+  }
+}
+
+@media (max-width: 768px) {
+  .movie-card {
+    flex: 0 1 calc((100% - 40px) / 3);
+    max-width: calc((100% - 40px) / 3);
+  }
+}
+
+
 /* ==================================================
    AUTHENTICATION PAGE STYLES
+   --------------------------------------------------
+   Applies to:
+   - Login form
+   - Registration form
+   - Shared auth UI components
 ================================================== */
 
+
+/* ==================================================
+   AUTH LAYOUT
+   - Controls spacing between login and register columns
+================================================== */
 #auth-row {
-  justify-content: space-evenly;
-}
-
-#login-container {
-  width: 500px;
-}
-
-#register-container {
-  width: 600px;
+  justify-content: space-evenly; /* Even horizontal spacing between forms */
 }
 
 
+/* ==================================================
+   SECTION HEADINGS
+   - Styles Login and Register titles
+   - Creates centered underline highlight
+================================================== */
 #login-container h2,
 #register-container h2 {
-  text-align: center;
-  border-bottom: 2px solid #FFD54F;
-  width: 270px;
-  margin: 0 auto;
-  padding: 10px;
+  text-align: center;                 /* Center title text */
+  border-bottom: 2px solid #FFD54F; /* Accent underline */
+  width: 270px;                       /* Fixed underline width */
+  margin: 0 auto;                     /* Center block horizontally */
+  padding: 10px;                      /* Space around text */
 }
 
+
+/* ==================================================
+   FORM CONTAINERS
+   - Limits form width
+   - Centers forms on the page
+================================================== */
 #login-container form,
 #register-container form {
   display: block;
-  max-width: 500px;
-  margin: 30px auto;
-  background-color: #121212;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.5);
-  background: linear-gradient(145deg, #1a1a1a, #111);
-  border: 1px solid #2a2a2a;
+  max-width: 500px;   /* Prevent overly wide forms */
+  margin: 30px auto;  /* Vertical spacing + horizontal centering */
 }
 
+/* ==================================================
+   FORM SPACING FIX (Bootstrap 5 compatibility)
+================================================== */
 #login-container .form-group,
 #register-container .form-group {
   margin-bottom: 1rem;
 }
 
+
+/* ==================================================
+   PRIMARY AUTH BUTTON
+   - Used for Login and Register submit buttons
+================================================== */
 .card-btn {
   color: #000;
   background-color: #FFD54F;
@@ -326,6 +373,11 @@ body {
   width: 100%;
 }
 
+
+/* ==================================================
+   BUTTON HOVER EFFECT
+   - Inverts button style for interactivity
+================================================== */
 .card-btn:hover {
   background-color: transparent;
   color: #FFD54F;
@@ -333,6 +385,23 @@ body {
   transition: all 0.2s ease-in-out;
 }
 
+
+@media (max-width: 768px) {
+  #login-container,
+  #register-container {
+    margin-bottom: 30px;
+  }
+}
+
+#login-container form,
+#register-container form {
+  background-color: #121212;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  background: linear-gradient(145deg, #1a1a1a, #111);
+  border: 1px solid #2a2a2a;
+}
 
 #login-container input,
 #register-container input {
@@ -346,15 +415,6 @@ body {
   border-radius: 8px;
   padding: 12px;
 }
-
-@media (max-width: 768px) {
-  #login-container,
-  #register-container {
-    margin-bottom: 30px;
-  }
-}
-
-
 
 /* ==================================================
   EDIT PROFILE
