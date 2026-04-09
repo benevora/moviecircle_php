@@ -151,8 +151,11 @@
           </div>
           <div class="col-md-9 author-details-container">
             <h4 class="author-name">
-              <a href="#">Ben</a>
+              <a href="<?= $BASE_URL ?>profile.php?id=<?= $reviewUser->id ?>">
+                <?= $reviewUser->name ?>
+              </a>
             </h4>
+
             <p><i class="fas fa-star"></i> 9</p>
           </div>
           <div class="col-md-12">
