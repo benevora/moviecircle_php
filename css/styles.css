@@ -503,7 +503,7 @@ body {
 
 .edit-profile-page .card-btn, 
 #add-movie-container .card-btn,
-#review-form .card-btn, 
+#review-form-container .card-btn, 
 #edit-movie-form .card-btn {
   width: 100%;
   max-width: 200px;
@@ -540,6 +540,10 @@ body {
 
 .about-title {
   color: #ccc;
+}
+
+#profile-image-container {
+  margin-top: 20px;
 }
 
 .profile-description {
@@ -745,6 +749,8 @@ body {
 }
 
 #review-form-container {
+  max-width: 600px;
+
   background-color: #333;
   padding: 20px;
   box-shadow: 0 0 15px rgba(0,0,0,0.5);
@@ -760,7 +766,7 @@ body {
 }
 
 
-#review-form select {
+#review-form-container select {
   appearance: auto;
   -webkit-appearance: auto;
   -moz-appearance: auto;
@@ -769,6 +775,7 @@ body {
   padding: 10px;
   color: #111;
 }
+
 
 #reviews-container {
   margin-top: 20px;
@@ -807,7 +814,7 @@ body {
 
 
 /* ==================================================
-  DASHBOARD
+  DASHBOARD - MY FILMS PAGE
 ================================================== */
 #add-movie-container {
   text-align: right;
@@ -888,6 +895,7 @@ body {
 }
 
 .action-buttons {
+  font-size: 13px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -904,7 +912,6 @@ body {
   white-space: nowrap; 
   text-align: center
 }
-
 
 
 .movie-title-cell {
@@ -1051,14 +1058,16 @@ page-description {
   transition: all 0.2s ease;
 }
 
-#edit-movie-form input:focus,
-#edit-movie-form select:focus,
-#edit-movie-form textarea:focus {
-  border-color: #FFD54F;
-  box-shadow: 0 0 5px rgba(255, 213, 79, 0.5);
-  outline: none;
-}
 
+#edit-movie-form  select {
+  appearance: auto;
+  -webkit-appearance: auto;
+  -moz-appearance: auto;
+  border: 1px solid #2f2f2f;
+  border-radius: 8px;
+  padding: 10px;
+  color: #000;
+}
 
 /* Submit button */
 #edit-movie-form .card-btn {
@@ -1128,6 +1137,146 @@ page-description {
 
 
 /* ==================================================
+  ADMIN
+================================================== */
+.section-description {
+  margin-bottom: 20px;
+}
+
+.admin-section {
+  margin-bottom: 50px;
+}
+
+#user-dashboard table {
+  width: 100%;
+}
+
+#user-dashboard .table.table {
+  background: linear-gradient(145deg, #1a1a1a, #111);
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  border: 1px solid #2a2a2a;
+  color: #FFF;
+}
+
+#user-dashboard table th {
+  background-color: #111;      
+  font-weight: bold;
+  border-bottom: 3px solid #FFD54F; 
+  color: #FFD54F;
+}
+
+#user-dashboard td {
+  background-color: #1a1a1a;      
+  font-weight: bold;
+  color: #FFF;
+}
+
+#user-dashboard .table-movie-title {
+  color: #FFF;             
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+
+.table-user-link {
+  color: #FFF;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.table-user-link:hover {
+  color: #FFD54F;
+}
+
+.btn-ban {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 26px;
+  padding: 2px 8px;
+  border-radius: 5px;
+
+  background-color: #FF4C4C;
+  color: #fff;
+
+  font-weight: bold;
+  font-size: 13px;
+
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.btn-ban:hover {
+  background-color: transparent;
+  color: #FF4C4C;
+  border: 1px solid #FF4C4C;
+}
+
+
+.btn-unban {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 26px;
+  padding: 2px 8px;
+  border-radius: 5px;
+
+  background-color: #28a745;
+  color: #fff;
+
+  font-weight: bold;
+  font-size: 13px;
+
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.btn-unban:hover {
+  background-color: transparent;
+  color: #28a745;
+  border: 1px solid #28a745;
+}
+
+.btn-ban,
+.btn-unban {
+  min-width: 80px;
+  justify-content: center;
+}
+
+
+.status-badge {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1;
+}
+
+.status-banned {
+  color: #FF4C4C;
+}
+
+.status-active {
+  color: #28a745;
+}
+
+
+/* ==================================================
+  SEARCH
+================================================== */
+#search-title {
+  font-size: 40px;
+}
+
+#search-result,
+.back-link {
+  color: #FFD54F;
+  text-decoration: none;
+}
+
+/* ==================================================
   FOOTER
 ================================================== */
 
@@ -1184,3 +1333,4 @@ page-description {
 #footer-links-container {
   margin: 30px 0;
 }
+

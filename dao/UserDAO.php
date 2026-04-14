@@ -144,23 +144,38 @@
         $user = $this->findByToken($token);
 
         if ($user) {
+
+          //BLOCK BANNED USERS 
+          if ($user->is_banned) {
+
+            // destroy session
+            $this->destroyToken();
+
+            // redirect with message
+            $this->message->setMessage(
+              "Your account has been banned.",
+              "error",
+              "index.php"
+            );
+            exit;
+          }
+
           return $user;
+
         } else if($protected) {
-          // Redirects the unauthenticated user
           $this->message->setMessage(
             "Please authenticate to access this page.",
             "error",
             "index.php"
           );
         }
-        
+
       } else if($protected) {
-          // Redirects the unauthenticated user
-          $this->message->setMessage(
-            "Please authenticate to access this page.",
-            "error",
-            "index.php"
-          );
+        $this->message->setMessage(
+          "Please authenticate to access this page.",
+          "error",
+          "index.php"
+        );
       }
     }
 
@@ -209,6 +224,16 @@
         // check if the passwords match
         if (password_verify($password, $user->password)) {
           
+          // BLOCK BANNED USERS
+          if ($user->is_banned) {
+            $this->message->setMessage(
+              "Your account has been banned.",
+              "error",
+              "auth.php"
+            );
+            exit;
+          }
+
           // Generate a token and insert it into the session
           $token = $user->generateToken();
 
@@ -414,4 +439,49 @@
     {
       
     }
+
+    public function getAllUsers() {
+
+       $stmt = $this->conn->prepare("SELECT * FROM users");
+       $stmt->execute();
+
+       return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+
+    public function banUser($id) {
+
+      $stmt = $this->conn->prepare("UPDATE users 
+        SET is_banned = 1 
+        WHERE id = :id
+      ");
+
+      $stmt->bindParam(":id", $id);
+      $stmt->execute();
+
+      $this->message->setMessage(
+        "User banned successfully.",
+        "success",
+        "back"
+      );
+    }
+
+    public function unbanUser($id) {
+
+      $stmt = $this->conn->prepare("UPDATE users
+        SET is_banned = 0 
+        WHERE id = :id
+      ");
+
+      $stmt->bindParam(":id", $id);
+      $stmt->execute();
+
+      $this->message->setMessage(
+        "User unbanned successfully.",
+        "success",
+        "back"
+      );
+    }
+
+
   }

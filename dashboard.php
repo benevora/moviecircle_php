@@ -68,7 +68,7 @@
               </a>
             </td>
 
-            <td><i class="fas fa-star"></i><span class="rating-number">9</span></td>
+            <td><i class="fas fa-star"></i><span class="rating-number"><?= $movie->rating ?></span></td>
 
             <td class="actions-column">
               <div class="action-buttons">
