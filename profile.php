@@ -64,7 +64,19 @@
     <div class="col-md-8 offset-md-2">
       <div class="row profile-container">
         <div class="col-md-12 about-container">
-          <h1 class="page-title"><?= $fullName ?></h1>
+
+          <div class="position-relative text-center">
+            <h1 class="page-title mb-0"><?= $fullName ?></h1>
+
+            <?php if($loggedUser && $loggedUser->id == $userData->id): ?>
+              <a href="<?= $BASE_URL ?>editprofile.php" 
+                class="btn btn-warning position-absolute end-0 top-50 translate-middle-y">
+                Edit Profile
+              </a>
+           <?php endif; ?>
+
+          </div>
+
            <div id="profile-image-container" class="profile-image" style="background-image: url('<?= $BASE_URL ?>img/users/<?= $userData->image ?>')"></div>
            <h3 class="about-title">About:</h3>
            <?php if(!empty($userData->bio)): ?>

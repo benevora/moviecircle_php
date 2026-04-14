@@ -94,7 +94,7 @@
        $message->setMessage(
           "welcome",
           "success",
-          "editprofile.php"
+          "profile.php"
       );
       
     // Redirects the user if authentication fails

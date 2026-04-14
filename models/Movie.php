@@ -10,6 +10,7 @@
     public $length;
     public $users_id;
 
+    public $rating;
 
     public function imageGenerateName($extension = "jpg") {
       return bin2hex(random_bytes(60)) . "." . $extension;
@@ -32,6 +33,14 @@
       }
 
       return $this->trailer;
+    }
+
+    public function getTitle() {
+      return $this->title;
+    }
+
+    public function getId() {
+      return $this->id;
     }
 
   }

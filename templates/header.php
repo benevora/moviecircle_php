@@ -109,7 +109,7 @@
       <!-- Collapsible navigation links -->
       <div class="collapse navbar-collapse" id="navbar">
         <!-- Movie search form -->
-        <form action="" method="GET" id="search-form" class="d-flex align-items-center">
+        <form action="<?= $BASE_URL ?>search.php" method="GET" id="search-form" class="d-flex align-items-center">
 
           <!-- search input -->
           <input 
@@ -141,7 +141,7 @@
             </li>
 
             <li class="nav-item">
-              <a href="<?= $BASE_URL ?>editprofile.php" class="nav-link bold"><?= $userData->name ?></a>
+              <a href="<?= $BASE_URL ?>profile.php" class="nav-link bold"><?= $userData->name ?></a>
             </li>
 
             <!-- Admin Panel link -->

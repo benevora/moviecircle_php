@@ -10,14 +10,22 @@
   require_once("templates/header.php");
   require_once("models/Movie.php");
   require_once("dao/MovieDAO.php");
+  require_once("dao/ReviewDAO.php");
 
+ 
 
   // Get the movie id
   $id = filter_input(INPUT_GET, "id");
 
   $movie;
 
- $movieDao = new MovieDAO($conn, $BASE_URL);
+  $movieDao = new MovieDAO($conn, $BASE_URL);
+  $reviewDao = new ReviewDAO($conn, $BASE_URL);
+ $action = filter_input(INPUT_GET, "action");
+
+  if($action !== "rate") {
+    $action = "about";
+  }
 
   if(empty($id)) {
     $message->setMessage(
@@ -52,11 +60,14 @@
     if($userData->id === $movie->users_id) {
       $userOwnsMovie = true;
     }
+
+    // Retrieve the movie reviews
+    $alreadyReviewed = $reviewDao->hasAlreadyReviewed($id, $userData->id);
   }
 
   // Retrieve the movie reviews
-  $alreadyReviewed = false;
-
+  $movieReviews = $reviewDao->getMoviesReview($id);
+  
 ?>
 
 
@@ -74,7 +85,7 @@
         <span class="pipe"></span>
         <span><?= $movie->category ?></span>
         <span class="pipe"></span>
-        <span><i class="fas fa-star"></i> 9</span>
+        <span><i class="fas fa-star"></i> <?= $movie->rating ?></span>
       </p>
       
       <?php if($movie->getTrailerEmbed()): ?>
@@ -90,7 +101,8 @@
       <img 
         src="<?= $BASE_URL ?>img/movies/<?= $movie->image ?>" 
         alt="<?= $movie->title ?>" 
-        class="movie-page-image">
+        class="movie-page-image"
+      >
     </div>
     
      <!-- DESCRIPTION FULL WIDTH -->
@@ -109,17 +121,43 @@
     <div class="offset-md-1 col-md-10" id="reviews-container">
       <h3 id="reviews-title">Reviews:</h3>
 
-      <!-- Checks whether to enable reviews for the user or not -->
-      <?php if(!empty($userData) && !$userOwnsMovie && !$alreadyReviewed): ?>
-        <div class="col-md-12" id="review-form-container">
+      <!-- Messages ONLY when clicking RATE -->
+      <?php if($action === "rate"): ?>
+
+        <?php if(empty($userData)): ?>
+          <div class="alert alert-warning mt-3">
+            You need to <a href="<?= $BASE_URL ?>auth.php">login</a> to rate this movie.
+          </div>
+
+        <?php elseif($userOwnsMovie): ?>
+          <div class="alert alert-info mt-3">
+            You cannot rate your own movie.
+          </div>
+
+        <?php elseif($alreadyReviewed): ?>
+          <div class="alert alert-success mt-3">
+            You already reviewed this movie.
+          </div>
+
+        <?php endif; ?>
+
+      <?php endif; ?>
+
+
+      <!-- REVIEW FORM (ONLY when clicking Rate) -->
+      <?php if($action === "rate" && !empty($userData) && !$userOwnsMovie &&!$alreadyReviewed): ?>
+        
+        <div class="row mt-4">
+          <div class="col-md-12" id="review-form-container">
           <h4>Send your review:</h4>
-          <p class="page-description">Fill out the form with your rating and comments about the film</p>
-          <form action="<?= $BASE_URL ?>review_process.php" id="review-form" method="POST">
+
+          <form action="<?= $BASE_URL ?>review_process.php" method="POST">
             <input type="hidden" name="type" value="create">
             <input type="hidden" name="movies_id" value="<?= $movie->id ?>">
+
             <div class="form-group">
-              <label for="rating">Movie rating:</label>
-              <select name="rating" id="rating" class="form-control">
+              <label>Movie rating:</label>
+              <select name="rating" class="form-control">
                 <option value="">Select</option>
                 <option value="10">10</option>
                 <option value="9">9</option>
@@ -141,45 +179,20 @@
 
             <input type="submit" class="btn card-btn" value="Send Comment">
           </form>
+          </div>
         </div>
+
       <?php endif; ?>
-      <!-- comment -->
-      <div class="col-md-12 review">
-        <div class="row">
-          <div class="col-md-1">
-            <div class="profile-image-container review-image" style="background-image: url('<?= $BASE_URL ?>img/users/user.png')"></div>
-          </div>
-          <div class="col-md-9 author-details-container">
-            <h4 class="author-name">
-              <a href="#">Ben</a>
-            </h4>
-            <p><i class="fas fa-star"></i> 9</p>
-          </div>
-          <div class="col-md-12">
-            <p class="comment-title">Comment:</p>
-            <p>This is the user's comment</p>
-          </div>
-        </div>
-      </div>
-      
-      <!-- comment -->
-      <div class="col-md-12">
-        <div class="row">
-          <div class="col-md-1">
-            <div class="profile-image-container review-image" style="background-image: url('<?= $BASE_URL ?>img/users/user.png')"></div>
-          </div>
-          <div class="col-md-9 author-details-container">
-            <h4 class="author-name">
-              <a href="#">Ben</a>
-            </h4>
-            <p><i class="fas fa-star"></i> 9</p>
-          </div>
-          <div class="col-md-12">
-            <p class="comment-title">Comment:</p>
-            <p>This is the user's comment</p>
-          </div>
-        </div>
-      </div>
+
+
+      <!-- Reviews list (ALWAYS visible) -->
+      <?php foreach($movieReviews as $review): ?>
+        <?php require("templates/user_review.php"); ?>
+      <?php endforeach; ?>
+
+      <?php if(count($movieReviews) == 0): ?>
+        <p class="empty-list">There are no comments for this movie yet...</p>
+      <?php endif; ?>
 
     </div>
   </div>
@@ -197,4 +210,3 @@
   // Load footer template (footer + scrips)
   require_once("templates/footer.php");
 ?>
-
