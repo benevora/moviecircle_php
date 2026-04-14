@@ -83,4 +83,18 @@ class FollowDAO {
 
     return $stmt->fetchColumn();
   }
+  public function getFollowing($userId) {
+  $stmt = $this->conn->prepare("
+    SELECT users.* FROM follows
+    JOIN users ON users.id = follows.followed_id
+    WHERE follows.follower_id = :id
+    ORDER BY follows.created_at DESC
+  ");
+
+  $stmt->bindParam(":id", $userId);
+  $stmt->execute();
+
+  return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 }

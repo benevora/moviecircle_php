@@ -50,9 +50,6 @@
       return $user;
     }
 
-
-
-
     /* ======================================
       CREATE USER
       - Inserts a new user into database
@@ -273,18 +270,30 @@
       - 
       - 
     ====================================== */
-    public function findById($id) {
-      if ($id) {
+    public function findById($id)
+    {
+           if($id != "") {
+
         $stmt = $this->conn->prepare("SELECT * FROM users WHERE id = :id");
+
         $stmt->bindParam(":id", $id);
+
         $stmt->execute();
-        if ($stmt->rowCount() > 0) {
+
+        if($stmt->rowCount() > 0) {
+
           $data = $stmt->fetch();
           $user = $this->buildUser($data);
+          
           return $user;
+
+        } else {
+          return false;
         }
+
+      } else {
+        return false;
       }
-      return false;
     }
 
 
