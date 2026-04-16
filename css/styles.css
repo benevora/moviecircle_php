@@ -170,7 +170,33 @@ body {
   border-left: 4px solid #FFD54F;
   padding-left: 12px;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
+
+.clear-filter {
+  display: inline-block;
+  margin-bottom: 15px;
+  color: #f44336;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.clear-filter:hover {
+  text-decoration: underline;
+}
+
+#home-page-form {
+  margin-bottom: 20px;
+}
+
+#home-page-form #category {
+  padding: 8px 12px;
+  border-radius: 3px;
+  background-color: #1c1c1c;
+  color: #fff;
+  border: 1px solid #2f2f2f;
+}
+
 
 .section-description {
   color: #ccc;
@@ -280,10 +306,6 @@ body {
   width: 100%;
   font-weight: bold;
 }
-
-
-
-
 
 @media (max-width: 1200px) {
   .movie-card {
@@ -1198,13 +1220,10 @@ page-description {
   height: 26px;
   padding: 2px 8px;
   border-radius: 5px;
-
   background-color: #FF4C4C;
   color: #fff;
-
   font-weight: bold;
   font-size: 13px;
-
   text-decoration: none;
   transition: 0.3s ease;
 }

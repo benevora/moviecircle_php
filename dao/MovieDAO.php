@@ -258,5 +258,24 @@
       return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
+    public function getAllMoviesBuilt() {
+
+      $movies = [];
+
+      $stmt = $this->conn->query("SELECT * FROM movies ORDER BY id DESC");
+
+      if ($stmt->rowCount() > 0) {
+
+        $moviesArray = $stmt->fetchAll();
+
+        foreach($moviesArray as $movie) {
+          $movies[] = $this->buildMovie($movie);
+        }
+      }
+
+      return $movies;
+    }
+
+
 
   }

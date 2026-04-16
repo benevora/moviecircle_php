@@ -13,123 +13,65 @@
 
   // DAO of the movies
   $movieDao = new MovieDAO($conn, $BASE_URL);
-  
-  $latestMovies = $movieDao->getLatestMovies();
 
-  $actionMovies = $movieDao->getMoviesByCategory("Action");
+  // Get selected category
+  $category = "";
 
-  $comedyMovies = $movieDao->getMoviesByCategory("Comedy");
+  if(isset($_GET["category"])) {
+    $category = $_GET["category"];
+  }
 
-  $dramaMovies = $movieDao->getMoviesByCategory("Drama");
-
-  $fantasy_fictionMovies = $movieDao->getMoviesByCategory("Fantasy/Fiction");
-
-  $romanceMovies = $movieDao->getMoviesByCategory("Romance");
-
-  $animationMovies = $movieDao->getMoviesByCategory("Animation");
-
+  // Decide which movies to load
+  if($category == "") {
+    $movies = $movieDao->getAllMoviesBuilt();
+  } else {
+    $movies = $movieDao->getMoviesByCategory($category);
+  }
 ?>
 
   <!-- ========== MAIN CONTENT ========= -->
   <div id="main-container" class="container-fluid">
    
     <!-- NEW FILMS -->
-    <h2 class="section-title">New Films</h2>
-    <p class="section-description">See reviews of the latest movies added to MovieCircle</p>
+    <form method="GET" action="" id="home-page-form">
+      <h2 class="section-title">
+        <?= $category == "" ? "Posted Films" : $category . " Movies" ?>
+      </h2>
+      <label for="category">Filter by category:</label>
+      <select id="category" name="category" onchange="this.form.submit()">
+        <option value="">All Categories</option>
+        <option value="Action" <?= $category == "Action" ? "selected" : "" ?>>Action</option>
+        <option value="Comedy" <?= $category == "Comedy" ? "selected" : "" ?>>Comedy</option>
+        <option value="Drama" <?= $category == "Drama" ? "selected" : "" ?>>Drama</option>
+        <option value="Fantasy/Fiction" <?= $category == "Fantasy/Fiction" ? "selected" : "" ?>>Fantasy/Fiction</option>
+        <option value="Romance" <?= $category == "Romance" ? "selected" : "" ?>>Romance</option>
+        <option value="Animation" <?= $category == "Animation" ? "selected" : "" ?>>Animation</option>
+      </select>
+    </form>
+
+    <?php if($category != ""): ?>
+      <a href="index.php" class="clear-filter">Clear Filter</a>
+    <?php endif; ?>
+
+    <p class="section-description">
+      <?= $category == "" 
+        ? "Discover all movies available on MovieCircle" 
+        : "Showing " . $category . " movies" ?>
+    </p>
     <div class="movies-container">
 
-      <?php foreach($latestMovies as $movie): ?>
+      <?php foreach($movies as $movie): ?>
           <?php require("templates/movie_card.php"); ?>
       <?php endforeach; ?>
 
-      <?php if(count($latestMovies) === 0): ?>
-        <p class="empty-list">There are no movies registered yet.</p>
+      <?php if(count($movies) === 0): ?>
+        <p class="empty-list">
+          <?= $category == "" 
+              ? "There are no movies registered yet." 
+              : "There are no movies in this category yet." ?>
+        </p>
       <?php endif; ?>
 
-    </div>
-
-    <!-- ACTION FILMS -->
-    <h2 class="section-title">Action</h2>
-    <p class="section-description">Watch the best action movies</p>
-    <div class="movies-container">
-
-      <?php foreach($actionMovies as $movie): ?>
-        <?php require("templates/movie_card.php"); ?>
-      <?php endforeach; ?>
-        
-      <?php if(count($actionMovies) === 0): ?>
-        <p class="empty-list">There are no action movies listed yet!</p>
-      <?php endif; ?>
-    </div>
-
-    <!-- COMEDY FILMS -->
-    <h2 class="section-title">Comedy</h2>
-    <p class="section-description">Watch the best comedy movies</p>
-    <div class="movies-container">
-
-      <?php foreach($comedyMovies as $movie): ?>
-          <?php require("templates/movie_card.php"); ?>
-      <?php endforeach; ?>
-
-      <?php if(count($comedyMovies) === 0): ?>
-        <p class="empty-list">There are no comedy movies listed yet.</p>
-      <?php endif; ?>
-    </div>
-
-    <!-- DRAMA FILMS -->
-    <h2 class="section-title">Drama</h2>
-    <p class="section-description">Watch the best Drama movies</p>
-    <div class="movies-container">
-
-      <?php foreach($dramaMovies as $movie): ?>
-          <?php require("templates/movie_card.php"); ?>
-      <?php endforeach; ?>
-
-      <?php if(count($dramaMovies) === 0): ?>
-        <p class="empty-list">There are no Drama movies listed yet.</p>
-      <?php endif; ?>
-    </div>
-
-    <!-- FANTASY/FICTION FILMS -->
-    <h2 class="section-title">Fantasy/Fiction</h2>
-    <p class="section-description">Watch the best fantasy/fiction movies</p>
-    <div class="movies-container">
-
-      <?php foreach($fantasy_fictionMovies as $movie): ?>
-          <?php require("templates/movie_card.php"); ?>
-      <?php endforeach; ?>
-
-      <?php if(count($fantasy_fictionMovies) === 0): ?>
-        <p class="empty-list">There are no fantasy/fiction movies listed yet.</p>
-      <?php endif; ?>
-    </div>
-
-    <!-- ROMANCE FILMS -->
-    <h2 class="section-title">Romance</h2>
-    <p class="section-description">Watch the best romance movies</p>
-    <div class="movies-container">
-
-      <?php foreach($romanceMovies as $movie): ?>
-          <?php require("templates/movie_card.php"); ?>
-      <?php endforeach; ?>
-
-      <?php if(count($romanceMovies) === 0): ?>
-        <p class="empty-list">There are no romance movies listed yet.</p>
-      <?php endif; ?>
-    </div>
-
-    <!-- ANIMATION FILMS -->
-    <h2 class="section-title">Animation</h2>
-    <p class="section-description">Watch the best animation movies</p>
-    <div class="movies-container">
-
-      <?php foreach($animationMovies as $movie): ?>
-          <?php require("templates/movie_card.php"); ?>
-      <?php endforeach; ?>
-
-      <?php if(count($animationMovies) === 0): ?>
-        <p class="empty-list">There are no animation movies listed yet.</p>
-      <?php endif; ?>
     </div>
 
   </div>
