@@ -10,6 +10,7 @@
 require_once("templates/header.php");
 
 // checks if the user is authenticated
+ require_once("models/User.php");
 require_once("dao/UserDAO.php");
 require_once("dao/MovieDAO.php");
 require_once("dao/FollowDAO.php");
