@@ -1,22 +1,17 @@
 <?php
 
 require_once("templates/header.php");
-
 require_once("dao/UserDAO.php");
-
 require_once("dao/FollowDAO.php");
 
 $userDao = new UserDAO($conn, $BASE_URL);
-
 $followDao = new FollowDAO($conn);
 
 $userId = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
 
 $user = $userDao->findById($userId);
 
-if (!$user) 
-  {
-
+if (!$user) {
   $message->setMessage("User not found!", "error", "index.php");
   exit;
 }
@@ -43,11 +38,8 @@ $following = $followDao->getFollowing($userId);
   <?php endforeach; ?>
 
   <?php if(count($following) === 0): ?>
-
     <p>Not following anyone yet.</p>
-    
   <?php endif; ?>
-
 </div>
 
 <?php require_once("templates/footer.php"); ?>
