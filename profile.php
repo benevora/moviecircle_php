@@ -167,5 +167,3 @@
   // Load footer template (footer + scrips)
   require_once("templates/footer.php");
 ?>
-profile.php
-Displaying profile.php.

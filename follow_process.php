@@ -7,39 +7,38 @@ require_once("dao/FollowDAO.php");
 $userDao = new UserDAO($conn, $BASE_URL);
 $followDao = new FollowDAO($conn);
 
-$userId = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
+// Get logged user safely
+$loggedUser = $userDao->verifyToken(false);
 
-$user = $userDao->findById($userId);
-
-if (!$user) {
-  $message->setMessage("User not found!", "error", "index.php");
+if (!$loggedUser) {
+  $message->setMessage("You must be logged in!", "error", "index.php");
   exit;
 }
 
-$following = $followDao->getFollowing($userId);
+$followerId = $loggedUser->id;
 
-?>
+// Get POST data safely
+$followingId = filter_input(INPUT_POST, "following_id", FILTER_VALIDATE_INT);
+$action = filter_input(INPUT_POST, "action");
 
-<div id="main-container" class="container-fluid">
-  <h2><?= $user->name ?> is Following</h2>
+if (!$followingId || !$action) {
+  $message->setMessage("Invalid request!", "error", "index.php");
+  exit;
+}
 
-  <?php foreach($following as $u): ?>
+// Prevent self-follow
+if ($followerId == $followingId) {
+  $message->setMessage("You cannot follow yourself!", "error", "index.php");
+  exit;
+}
 
-    <a href="profile.php?id=<?= $u->id ?>" class="user-card">
-      <div class="user-card-img"
-           style="background-image: url('<?= $BASE_URL ?>img/users/<?= $u->image ?>')">
-      </div>
+// Execute action
+if ($action === "follow") {
+  $followDao->followUser($followerId, $followingId);
+} else if ($action === "unfollow") {
+  $followDao->unfollowUser($followerId, $followingId);
+}
 
-      <div>
-        <?= $u->name ?> <?= $u->lastname ?>
-      </div>
-    </a>
-
-  <?php endforeach; ?>
-
-  <?php if(count($following) === 0): ?>
-    <p>Not following anyone yet.</p>
-  <?php endif; ?>
-</div>
-
-<?php require_once("templates/footer.php"); ?>
+// Redirect back to profile
+header("Location: profile.php?id=" . $followingId);
+exit;

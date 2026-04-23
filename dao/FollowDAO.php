@@ -1,7 +1,6 @@
 <?php
 
-  class FollowDAO 
-  {
+  class FollowDAO {
 
   private $conn;
 
