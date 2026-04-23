@@ -1,16 +1,3 @@
-Enable desktop notifications for Gmail.
-   OK  No thanks
-1 of many
-following file
-Inbox
-
-Ben Evora
-Attachments
-4:09 PM (3 minutes ago)
-to me
-
- 5 Attachments
-  •  Scanned by Gmail
 <?php
 
 require_once("templates/header.php");
