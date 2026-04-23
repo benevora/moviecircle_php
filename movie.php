@@ -15,37 +15,38 @@
  
 
   // Get the movie id
-  $id = filter_input(INPUT_GET, "id");
+$movieDao = new MovieDAO($conn, $BASE_URL);
+$reviewDao = new ReviewDAO($conn, $BASE_URL);
+$userDao = new UserDAO($conn, $BASE_URL);
 
-  $movie;
+$id = filter_input(INPUT_GET, "id");
+$action = filter_input(INPUT_GET, "action");
 
-  $movieDao = new MovieDAO($conn, $BASE_URL);
-  $reviewDao = new ReviewDAO($conn, $BASE_URL);
- $action = filter_input(INPUT_GET, "action");
+if($action !== "rate") {
+  $action = "about";
+}
 
-  if($action !== "rate") {
-    $action = "about";
-  }
+if(empty($id)) {
+  $message->setMessage(
+    "The movie could not be found!",
+    "error",
+    "index.php"
+  );
+  exit;
+}
 
-  if(empty($id)) {
-    $message->setMessage(
-      "The movie could not be found!",
-      "error",
-      "index.php"
-    );
-  } else {
+$movie = $movieDao->findById($id);
 
-    $movie = $movieDao->findById($id);
+if(!$movie) {
+  $message->setMessage(
+    "The movie could not be found!",
+    "error",
+    "index.php"
+  );
+  exit;
+}
 
-    // Check if the film exists
-    if(!$movie) {
-      $message->setMessage(
-        "The movie could not be found!",
-        "error",
-        "index.php"
-      );
-    } 
-  }
+$movieOwner = $userDao->findById($movie->users_id);
 
   // check if the film has an image
   if($movie->image == "") {
@@ -78,6 +79,7 @@
     <!-- LEFT SIDE -->
     <div class="offset-md-1 col-md-6 movie-container movie-left">
 
+     <div class="movie-header">
       <h1 class="page-title"><?= $movie->title ?></h1>
 
       <p class="movie-details">
@@ -87,12 +89,27 @@
         <span class="pipe"></span>
         <span><i class="fas fa-star"></i> <?= $movie->rating ?></span>
       </p>
+
+      <?php if($movieOwner): ?>
+        <div class="movie-owner">
+          <span class="added-label">Added by:</span>
+
+          <div class="user-card-img"
+            style="background-image: url('<?= $BASE_URL ?>img/users/<?= $movieOwner->image ?>')">
+          </div>
+
+          <a href="<?= $BASE_URL ?>profile.php?id=<?= $movieOwner->id ?>">
+            <?= $movieOwner->name ?>
+          </a>
+        </div>
+      <?php endif; ?> 
       
       <?php if($movie->getTrailerEmbed()): ?>
         <div class="trailer-container">
           <iframe src="<?= $movie->getTrailerEmbed() ?>" frameborder="0" allowfullscreen></iframe>
         </div>
       <?php endif; ?>
+     </div>
     
     </div>
     
@@ -147,40 +164,40 @@
       <!-- REVIEW FORM (ONLY when clicking Rate) -->
       <?php if($action === "rate" && !empty($userData) && !$userOwnsMovie &&!$alreadyReviewed): ?>
         
-        <div class="row mt-4">
-          <div class="col-md-12" id="review-form-container">
-          <h4>Send your review:</h4>
+      <div class="row mt-4">
+        <div class="col-md-12" id="review-form-container">
+        <h4>Send your review:</h4>
 
-          <form action="<?= $BASE_URL ?>review_process.php" method="POST">
-            <input type="hidden" name="type" value="create">
-            <input type="hidden" name="movies_id" value="<?= $movie->id ?>">
+        <form action="<?= $BASE_URL ?>review_process.php" method="POST">
+          <input type="hidden" name="type" value="create">
+          <input type="hidden" name="movies_id" value="<?= $movie->id ?>">
 
-            <div class="form-group">
-              <label>Movie rating:</label>
-              <select name="rating" class="form-control">
-                <option value="">Select</option>
-                <option value="10">10</option>
-                <option value="9">9</option>
-                <option value="8">8</option>
-                <option value="7">7</option>
-                <option value="6">6</option>
-                <option value="5">5</option>
-                <option value="4">4</option>
-                <option value="3">3</option>
-                <option value="2">2</option>
-                <option value="1">1</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="review">Your comment:</label>
-              <textarea name="review" id="review" rows="3" class="form-control" placeholder="What did you think of the movie?"></textarea>
-            </div>
-
-            <input type="submit" class="btn card-btn" value="Send Comment">
-          </form>
+          <div class="form-group">
+            <label>Movie rating:</label>
+            <select name="rating" class="form-control">
+              <option value="">Select</option>
+              <option value="10">10</option>
+              <option value="9">9</option>
+              <option value="8">8</option>
+              <option value="7">7</option>
+              <option value="6">6</option>
+              <option value="5">5</option>
+              <option value="4">4</option>
+              <option value="3">3</option>
+              <option value="2">2</option>
+              <option value="1">1</option>
+            </select>
           </div>
+
+          <div class="form-group">
+            <label for="review">Your comment:</label>
+            <textarea name="review" id="review" rows="3" class="form-control" placeholder="What did you think of the movie?"></textarea>
+          </div>
+
+          <input type="submit" class="btn card-btn" value="Send Comment">
+        </form>
         </div>
+      </div>
 
       <?php endif; ?>
 
