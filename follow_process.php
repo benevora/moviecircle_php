@@ -1,40 +1,45 @@
 <?php
 
-require_once("globals.php");
-require_once("config/db.php");
-require_once("models/Message.php");
+require_once("templates/header.php");
 require_once("dao/UserDAO.php");
 require_once("dao/FollowDAO.php");
 
-$message = new Message($BASE_URL);
 $userDao = new UserDAO($conn, $BASE_URL);
 $followDao = new FollowDAO($conn);
 
-$userData = $userDao->verifyToken(true);
+$userId = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
 
-$type = filter_input(INPUT_POST, "type");
-$targetId = filter_input(INPUT_POST, "user_id");
+$user = $userDao->findById($userId);
 
-if (!$targetId) {
-  $message->setMessage("Invalid user.", "error", "back");
+if (!$user) {
+  $message->setMessage("User not found!", "error", "index.php");
+  exit;
 }
 
-if ($type === "follow") {
+$following = $followDao->getFollowing($userId);
 
-  if ($followDao->isFollowing($userData->id, $targetId)) {
-    $message->setMessage("You already follow this user.", "error", "back");
-  }
+?>
 
-  $followDao->follow($userData->id, $targetId);
+<div id="main-container" class="container-fluid">
+  <h2><?= $user->name ?> is Following</h2>
 
-  $message->setMessage("You are now following this user!", "success", "back");
+  <?php foreach($following as $u): ?>
 
-} elseif ($type === "unfollow") {
+    <a href="profile.php?id=<?= $u->id ?>" class="user-card">
+      <div class="user-card-img"
+           style="background-image: url('<?= $BASE_URL ?>img/users/<?= $u->image ?>')">
+      </div>
 
-  $followDao->unfollow($userData->id, $targetId);
+      <div>
+        <?= $u->name ?> <?= $u->lastname ?>
+      </div>
+    </a>
 
-  $message->setMessage("You unfollowed this user.", "success", "back");
+  <?php endforeach; ?>
 
-} else {
-  $message->setMessage("Invalid action.", "error", "index.php");
-}
+  <?php if(count($following) === 0): ?>
+    <p>Not following anyone yet.</p>
+  <?php endif; ?>
+</div>
+
+<?php require_once("templates/footer.php"); ?>

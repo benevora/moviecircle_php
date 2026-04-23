@@ -1,4 +1,18 @@
+Enable desktop notifications for Gmail.
+   OK  No thanks
+1 of many
+following file
+Inbox
+
+Ben Evora
+Attachments
+4:09 PM (3 minutes ago)
+to me
+
+ 5 Attachments
+  •  Scanned by Gmail
 <?php
+
 require_once("templates/header.php");
 require_once("dao/UserDAO.php");
 require_once("dao/FollowDAO.php");
@@ -6,65 +20,41 @@ require_once("dao/FollowDAO.php");
 $userDao = new UserDAO($conn, $BASE_URL);
 $followDao = new FollowDAO($conn);
 
-// Logged-in user
-$loggedUser = $userDao->verifyToken(false);
+$userId = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
 
-// Get profile user ID
-$id = filter_input(INPUT_GET, "id");
+$user = $userDao->findById($userId);
 
-if (!$id) {
-  $message->setMessage("User not found.", "error", "index.php");
+if (!$user) {
+  $message->setMessage("User not found!", "error", "index.php");
   exit;
 }
 
-$profileUser = $userDao->findById($id);
+$followers = $followDao->getFollowers($userId);
 
-if (!$profileUser) {
-  $message->setMessage("User not found.", "error", "index.php");
-  exit;
-}
-
-// Get followers
-$followers = $followDao->getFollowers($profileUser->id);
 ?>
 
-<div id="main-container" class="container-fluid pt-5">
-  <h1><?= $profileUser->name ?>'s Followers</h1>
+<div id="main-container" class="container-fluid">
+  <h2><?= $user->name ?>'s Followers</h2>
 
-  <div class="row mt-4">
+  <?php foreach($followers as $u): ?>
 
-    <?php if (count($followers) === 0): ?>
-      <p class="empty-list">This user has no followers yet.</p>
-    <?php endif; ?>
-
-    <?php foreach ($followers as $follower): ?>
-
-      <?php
-        // image
-        if ($follower["image"] == "") {
-          $follower["image"] = "user.png";
-        }
-      ?>
-
-      <div class="col-md-4 mb-4">
-        <div class="card p-3">
-
-          <div class="profile-image-container review-image mb-3"
-               style="background-image: url('<?= $BASE_URL ?>img/users/<?= $follower["image"] ?>')">
-          </div>
-
-          <h4>
-            <a href="<?= $BASE_URL ?>profile.php?id=<?= $follower["id"] ?>">
-              <?= $follower["name"] . " " . $follower["lastname"] ?>
-            </a>
-          </h4>
-
-        </div>
+    <a href="profile.php?id=<?= $u->id ?>" class="user-card">
+      <div class="user-card-img"
+           style="background-image: url('<?= $BASE_URL ?>img/users/<?= $u->image ?>')">
       </div>
 
-    <?php endforeach; ?>
+      <div>
+        <?= $u->name ?> <?= $u->lastname ?>
+      </div>
+    </a>
 
-  </div>
+  <?php endforeach; ?>
+
+  <?php if(count($followers) === 0): ?>
+    <p>No followers yet.</p>
+  <?php endif; ?>
 </div>
 
-<?php require_once("templates/footer.php"); ?>
+<?php 
+  require_once("templates/footer.php"); 
+?>
