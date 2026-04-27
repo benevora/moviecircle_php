@@ -71,18 +71,15 @@
 
           <div class="position-relative text-center">
             <h1 class="page-title mb-0"><?= $fullName ?></h1>
-
-           
-
           </div>
 
-           <div id="profile-image-container" class="profile-image" style="background-image: url('<?= $BASE_URL ?>img/users/<?= $userData->image ?>')"></div>
-           <h3 class="about-title">About:</h3>
-           <?php if(!empty($userData->bio)): ?>
+          <div id="profile-image-container" class="profile-image" style="background-image: url('<?= $BASE_URL ?>img/users/<?= $userData->image ?>')"></div>
+          <h3 class="about-title">About:</h3>
+          <?php if(!empty($userData->bio)): ?>
             <p class="profile-description"><?= $userData->bio ?></p>
-            <?php else: ?>
-              <p class="profile-description">The user hasn't written anything here yet...</p>
-           <?php endif; ?>
+          <?php else: ?>
+            <p class="profile-description">The user hasn't written anything here yet...</p>
+          <?php endif; ?>
         </div>
         <div class="col-md-12 added-movies-container">
           <h3>Movies Posted:</h3>

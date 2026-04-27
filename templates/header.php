@@ -1,28 +1,18 @@
 <?php
+
   /* ======================================
-    GLOBAL CONFIGURATION
-    - starts sessions
-    - Defines Base URL
+     Global configuration
   ====================================== */
   require_once("globals.php");
   
-
-
   /* ======================================
-    DATABASE CONNECTION
-    - Creates PDO connection instance
-    - Makes #conn available globally
+     Database connection
   ====================================== */
   require_once("config/db.php");
 
 
-
-
    /* ======================================
-     FLASH MESSAGE SYSTEM
-     - Temporary messages for user feedback
-     - Example: login success, errors, alerts
-     - Will be shown once and then cleared
+     Flash message system
   ====================================== */
   require_once("models/Message.php");
 
@@ -38,12 +28,7 @@
 
 
   /* ======================================
-   USER AUTHENTICATION CHECK
-   - Creates UserDAO instance
-   - Verifies if a user session token exists
-   - If valid, returns the logged-in user's data
-   - If not logged in, returns null
-   - Used to dynamically update the navbar
+     User authentication
   ====================================== */
   require_once("dao/UserDAO.php");
   $userDao = new UserDAO($conn, $BASE_URL);
@@ -79,13 +64,15 @@
 </head>
 <body>
 
-  <!-- ================= HEADER ================= -->
+  <!-- ======================================
+       Header
+  ====================================== -->
   <header>
 
     <!-- Main navigation bar -->
     <nav id="main-navbar" class="navbar navbar-expand-lg">
-
-      <!-- Logo + Project Name -->
+      <div class="container-fluid">
+        <!-- Logo + Project Name -->
       <a href="<?= $BASE_URL ?>" class="navbar-brand"> 
         <img  src="<?= $BASE_URL ?>img/logo.svg" 
               alt="MovieCircle" 
@@ -162,6 +149,7 @@
           <?php endif; ?>
 
         </ul>
+      </div>
       </div>
     </nav>
   </header>

@@ -1,5 +1,8 @@
 <?php
 
+  /* ======================================
+     Movie model
+  ====================================== */
   class Movie {
     public $id;
     public $title;
@@ -12,10 +15,17 @@
 
     public $rating;
 
+    /* ======================================
+       // Generate image name
+    ====================================== */
     public function imageGenerateName($extension = "jpg") {
       return bin2hex(random_bytes(60)) . "." . $extension;
     }
 
+
+    /* ======================================
+       Get trailer embed URL
+    ====================================== */
     public function getTrailerEmbed() {
 
       // Normal YouTube link
@@ -34,11 +44,19 @@
 
       return $this->trailer;
     }
+    
 
+    /* ======================================
+       Get title
+    ====================================== */
     public function getTitle() {
       return $this->title;
     }
 
+
+    /* ======================================
+       Get ID
+    ====================================== */
     public function getId() {
       return $this->id;
     }
@@ -46,24 +64,38 @@
   }
 
 
+  /* ======================================
+     Movie DAO interface
+  ====================================== */
   interface MovieDAOInterface {
+
+    // Build movie
     public function buildMovie($data);
 
+    // Find all movies
     public function findAll();
 
+    // Get latest movies
     public function getLatestMovies();
 
+    // Get movies by category
     public function getMoviesByCategory($category);
 
+    // Get movies by user
     public function getMoviesByUserId($id);
 
+    // Find movie by ID
     public function findById($id);
 
+    // Find movie by title
     public function findByTitle($title);
 
+    // Create movie
     public function create(Movie $movie);
 
+    // Update movie
     public function update(Movie $movie);
 
+    // Delete movie
     public function destroy($id);
   }

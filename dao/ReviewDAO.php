@@ -12,10 +12,7 @@
     private $message;
 
     /* ======================================
-      CONSTRUCTOR
-      - Receives database connection
-      - Sets base URL
-      - Initializes message system
+      Initialize DB connection, base URL, and message system
     ====================================== */
     public function __construct(PDO $conn, $url)
     {
@@ -25,7 +22,9 @@
     }
 
 
-
+    /* ======================================
+      Convert DB row into Review object
+    ====================================== */
     public function buildReview($data) {
 
       $reviewObject = new Review();
@@ -39,6 +38,11 @@
       return $reviewObject;
 
     }
+
+
+    /* ======================================
+      Create a new review
+    ====================================== */
     public function create (Review $review) {
        $stmt = $this->conn->prepare("INSERT INTO reviews (
         rating, review, movies_id, users_id
@@ -55,7 +59,7 @@
 
       $stmt->execute();
 
-      // Message of success by adding film
+      // Success message
       $this->message->setMessage(
         "Review added successfully.",
         "success",
@@ -64,6 +68,9 @@
     }
 
 
+    /* ======================================
+      Get all reviews for a movie
+    ====================================== */
     public function getMoviesReview($id) {
 
       $reviews = [];
@@ -84,7 +91,7 @@
 
           $reviewObject = $this->buildReview($review);
 
-          // retrieve user data
+          // Attach user data to review
           $user = $userDao->findById($reviewObject->users_id);
 
           $reviewObject->user = $user;
@@ -99,9 +106,9 @@
       return $reviews;
     }
 
-
-
-
+    /* ======================================
+      Check if user already reviewed a movie
+    ====================================== */
     public function hasAlreadyReviewed($id, $userId) {
 
       $stmt = $this->conn->prepare("SELECT *FROM reviews WHERE movies_id = :movies_id AND users_id = :users_id");
@@ -120,7 +127,9 @@
     }
 
 
-    
+    /* ======================================
+      Get average rating of a movie
+    ====================================== */
     public function getRatings($id) {
 
       $stmt = $this->conn->prepare("SELECT *FROM reviews WHERE movies_id = :movies_id");

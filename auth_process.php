@@ -1,22 +1,44 @@
 <?php
 
+  /* ======================================
+    Load global configuration
+  ====================================== */
   require_once("globals.php");
+
+  /* ======================================
+    Database connection
+  ====================================== */
   require_once("config/db.php");
+
+  /* ======================================
+    Load models and DAOs
+  ====================================== */
   require_once("models/User.php");
   require_once("models/Message.php");
   require_once("dao/UserDAO.php");
 
+  /* ======================================
+    Initialize message system
+  ====================================== */
   $message = new Message($BASE_URL);
   
+  /* ======================================
+    Initialize User DAO
+  ====================================== */
   $userDao = new UserDAO($conn, $BASE_URL);
   
 
-  // check the form type
+  /* ======================================
+    Get form type (register or login)
+  ====================================== */
   $type = filter_input(INPUT_POST, "type");
 
-  // form type Verification
+  /* ======================================
+    REGISTER USER
+  ====================================== */
   if ($type === "register") {
 
+    
     $name = filter_input(INPUT_POST, "name");
     $lastname = filter_input(INPUT_POST, "lastname");
     $email = filter_input(INPUT_POST, "email");

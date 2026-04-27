@@ -104,8 +104,10 @@
 
     if ($movie) {
       
-      // check if the movie belongs to the user
-      if ($movie->users_id === $userData->id) {
+       $isAdmin = $userDao->isAdmin($userData);
+
+      // check if the movie belongs to the user or admin
+      if ($movie->users_id === $userData->id || $isAdmin) {
         
         $movieDao->destroy($movie->id);
       } else {

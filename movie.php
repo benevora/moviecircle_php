@@ -15,38 +15,38 @@
  
 
   // Get the movie id
-$movieDao = new MovieDAO($conn, $BASE_URL);
-$reviewDao = new ReviewDAO($conn, $BASE_URL);
-$userDao = new UserDAO($conn, $BASE_URL);
+  $movieDao = new MovieDAO($conn, $BASE_URL);
+  $reviewDao = new ReviewDAO($conn, $BASE_URL);
+  $userDao = new UserDAO($conn, $BASE_URL);
 
-$id = filter_input(INPUT_GET, "id");
-$action = filter_input(INPUT_GET, "action");
+  $id = filter_input(INPUT_GET, "id");
+  $action = filter_input(INPUT_GET, "action");
 
-if($action !== "rate") {
-  $action = "about";
-}
+  if($action !== "rate") {
+    $action = "about";
+  }
 
-if(empty($id)) {
-  $message->setMessage(
-    "The movie could not be found!",
-    "error",
-    "index.php"
-  );
-  exit;
-}
+  if(empty($id)) {
+    $message->setMessage(
+      "The movie could not be found!",
+      "error",
+      "index.php"
+    );
+    exit;
+  }
 
-$movie = $movieDao->findById($id);
+  $movie = $movieDao->findById($id);
 
-if(!$movie) {
-  $message->setMessage(
-    "The movie could not be found!",
-    "error",
-    "index.php"
-  );
-  exit;
-}
+  if(!$movie) {
+    $message->setMessage(
+      "The movie could not be found!",
+      "error",
+      "index.php"
+    );
+    exit;
+  }
 
-$movieOwner = $userDao->findById($movie->users_id);
+  $movieOwner = $userDao->findById($movie->users_id);
 
   // check if the film has an image
   if($movie->image == "") {

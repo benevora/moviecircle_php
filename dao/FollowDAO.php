@@ -1,18 +1,31 @@
 <?php
 
+  /* ==================================================
+   FOLLOW DAO
+   - Handles user follow system logic
+   - Allows users to follow/unfollow other users
+   - Checks follow status
+   - Retrieves followers and following lists
+   - Uses 'followers' database table
+  ================================================== */
+
   class FollowDAO {
 
   private $conn;
 
   public function __construct($conn) {
+    // Database connection
     $this->conn = $conn;
   }
 
-  // Follow user
+  /* ======================================   
+    Follow a user (only if not already following)
+  ====================================== */
   public function followUser($followerId, $followingId) {
 
+    // Prevent duplicate follows
     if ($this->isFollowing($followerId, $followingId)) {
-      return; // already following, do nothing
+      return;
     }
 
 
@@ -27,7 +40,10 @@
     $stmt->execute();
   }
 
-  // Unfollow user
+
+  /* ======================================   
+    Unfollow user
+  ====================================== */
   public function unfollowUser($followerId, $followingId) {
     $stmt = $this->conn->prepare("
       DELETE FROM followers 
@@ -41,7 +57,9 @@
     $stmt->execute();
   }
 
-  // Check if already following
+  /* ======================================   
+    Check if user is already following another user
+  ====================================== */
   public function isFollowing($followerId, $followingId) {
     $stmt = $this->conn->prepare("
       SELECT * FROM followers 
@@ -57,7 +75,9 @@
     return $stmt->rowCount() > 0;
   }
 
-  // Get followers of a user
+  /* ======================================
+    Get all followers of a user
+  ====================================== */
   public function getFollowers($userId) {
     $stmt = $this->conn->prepare("
       SELECT u.* FROM users u
@@ -71,7 +91,9 @@
     return $stmt->fetchAll(PDO::FETCH_OBJ);
   }
 
-  // Get users a user follows
+  /* ======================================     
+    Get all users that a user is following
+  ====================================== */
   public function getFollowing($userId) {
     $stmt = $this->conn->prepare("
       SELECT u.* FROM users u
