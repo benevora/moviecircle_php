@@ -1,110 +1,103 @@
 <?php
  
   /* ======================================
-     USER MODEL
-     - Represents a user entity in the system
-     - Stores user-related data from database
-     - Used by DAO to create and manipulate users
+     User model
   ====================================== */
-
   class User {
-    // Unique user ID (Primary Key)
     public $id;
 
-    // User first name
     public $name;
 
-    // User last name
     public $lastname;
 
-    // User email (used for login)
     public $email;
 
-    // User password
     public $password;
 
-    // Profile image filename/path
     public $image;
 
-    // Short biography or description
     public $bio;
 
-    // Authentication token (used for sessions/login)
     public $token;
 
-    // Admin role flag (1 = admin, 0 = regular user)
     public $is_admin;
 
-    // Ban status flag (1 = banned, 0 = active user)
     public $is_banned;
 
+    /* ======================================
+       Get full name
+    ====================================== */
     public function getFullName($user){
       return $user->name . " " . $user->lastname;
     }
 
+    /* ======================================
+       Generate token
+    ====================================== */
     public function generateToken() {
 
       return bin2hex(random_bytes(50));
     }
 
+
+    /* ======================================
+       Generate password hash
+    ====================================== */
     public function generatePassword($password) {
 
       return password_hash($password, PASSWORD_DEFAULT);
     }
 
+    /* ======================================
+       Generate image name
+    ====================================== */
     public function imageGenerateName($extension = "jpg") {
       return bin2hex(random_bytes(60)) . "." . $extension;
     }
   }
 
 
-
   /* ======================================
-     USER DATA ACCESS INTERFACE (DAO)
-     - Defines all database operations 
-       related to the User entity
-     - Forces consistency in UserDAO implementation
+     User DAO interface
   ====================================== */
   interface UserDAOInterface {
-    // Converts database array into a User object
+
+    // Build user
     public function buildUser($data);
 
-    // Inserts new user into database
-    // $authUser = true logs the user in after registration
+    // Create user
     public function create(User $user, $authUser = false);
 
-    // Updates existing user information
+    // Update user
     public function update(User $user,$redirect = true);
 
-    // Verifies if a user token is valid
-    // $protected = true blocks access if not authenticated
+    // Verify token
     public function verifyToken($protected = false);
 
-    // Saves authentication token in session
-    // $redirect = true redirects after login
+    // Set token to session
     public function setTokenToSession($token, $redirect = true); 
 
-    // Authenticates user using email and password
+    // Authenticate user
     public function authenticateUser($email, $password); 
 
-    // Finds user by email address
+    // Find user by email
     public function findByEmail($email); 
 
-    // Finds user by ID
+    // Find user by ID
     public function findById($id); 
 
-    // Finds user by authentication token
+    // Find user by token
     public function findByToken($token); 
 
-    // Removes authentication token (used for logout)
+    // Destroy token
     public function destroyToken();
 
-    // Updates user password (after hashing)
+    // Change password
     public function changePassword(User $user);
 
-    // Checks if user has admin privileges
+    // Check admin
     public function isAdmin(User $user);
 
-    // Grants or removes admin privileges
+    // Set admin
     public function setAdmin(User $user, $isAdmin = true);
   }

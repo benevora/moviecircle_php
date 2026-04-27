@@ -10,11 +10,9 @@
     private $url;
     private $message;
 
+
     /* ======================================
-      CONSTRUCTOR
-      - Receives database connection
-      - Sets base URL
-      - Initializes message system
+      Initialize DB connection, base URL, and message system
     ====================================== */
     public function __construct(PDO $conn, $url)
     {
@@ -24,13 +22,8 @@
     }
 
 
-
-
     /* ======================================
-      BUILD USER
-      - Receives database data (array)
-      - Converts it into a User object
-      - Returns a fully populated User
+      Convert database row into User object
     ====================================== */
     public function buildUser($data)
     {
@@ -51,13 +44,8 @@
     }
 
 
-
-
     /* ======================================
-      CREATE USER
-      - Inserts a new user into database
-      - Stores basic user information
-      - Optionally logs the user in
+      Create a new user (optionally auto-login)
     ====================================== */
     public function create(User $user, $authUser = false)
     {
@@ -73,7 +61,7 @@
 
       $stmt->execute();
 
-      // Automatically logs in the user after registration
+      // Auto login after registration
       if ($authUser) 
       {
         $this->setTokenToSession($user->token);
@@ -82,13 +70,8 @@
     }
 
 
-
-
     /* ======================================
-      UPDATE USER
-      - Updates user data in database
-      - Can update name, email, image, bio, token
-      - Optionally redirects with success message
+      Update user data
     ====================================== */
     public function update(User $user, $redirect = true)
     {
@@ -114,7 +97,7 @@
 
          if ($redirect) {
         
-        // Redirects to the user's profile
+        // Redirects to the user's profile after update
         $this->message->setMessage(
           "Data updated successfully",
           "success",
@@ -125,14 +108,8 @@
     }
 
 
-
-    
     /* ======================================
-      TOKEN VERIFICATION
-      - Checks if a session token exists
-      - Validates token against database
-      - Returns authenticated user if valid
-      - Redirects if page is protected
+      Check session token and return logged user
     ====================================== */
     public function verifyToken($protected = false)
     {
@@ -145,7 +122,7 @@
 
         if ($user) {
 
-          //BLOCK BANNED USERS 
+          // Block banned users
           if ($user->is_banned) {
 
             // destroy session
@@ -180,13 +157,8 @@
     }
 
 
-
-
     /* ======================================
-      SET TOKEN TO SESSION
-      - Stores authentication token in session
-      - Used to keep user logged in
-      - Optionally redirects after login
+      Store authentication token in session
     ====================================== */
     public function setTokenToSession($token, $redirect = true)
     {
@@ -205,15 +177,8 @@
     }
 
 
-
-
-
     /* ======================================
-      AUTHENTICATE USER
-      - Verifies user credentials (email/password)
-      - Generates new session token
-      - Updates user token in database
-      - Returns true if successful
+      Authenticate user login
     ====================================== */
     public function authenticateUser($email, $password)
     {
@@ -224,7 +189,7 @@
         // check if the passwords match
         if (password_verify($password, $user->password)) {
           
-          // BLOCK BANNED USERS
+          // Block banned users
           if ($user->is_banned) {
             $this->message->setMessage(
               "Your account has been banned.",
@@ -255,13 +220,8 @@
     }
 
 
-
-
     /* ======================================
-      FIND USER BY EMAIL
-      - Searches user in database by email
-      - Returns User object if found
-      - Returns false if not found
+      Find user by email
     ====================================== */
     public function findByEmail($email)
     {
@@ -291,12 +251,8 @@
     }
 
 
-
-
     /* ======================================
-      FIND USER BY ID
-      - 
-      - 
+      Find user by ID
     ====================================== */
     public function findById($id)
     {
@@ -327,12 +283,8 @@
 
 
 
-
     /* ======================================
-      FIND USER BY TOKEN
-      - Retrieves user using session token
-      - Used for authentication persistence
-      - Returns User object if valid
+      Find user by session token
     ====================================== */
     public function findByToken($token)
     {
@@ -366,11 +318,8 @@
     }
 
 
-     /* ======================================
-      USER LOGOUT
-      - Removes token from session
-      - Logs user out of the system
-      - Redirects with success message
+    /* ======================================
+      Logout user (remove session token)
     ====================================== */
     public function destroyToken()
     {
@@ -389,9 +338,7 @@
 
 
     /* ======================================
-      CHANGE PASSWORD
-      - 
-      - 
+      Change user password
     ====================================== */
     public function changePassword(User $user)
     {
@@ -415,9 +362,7 @@
 
 
     /* ======================================
-      CHECK ADMIN
-      - Verifies if user has admin privileges
-      - Returns true if admin, false otherwise
+      Check if user is admin
     ====================================== */
     public function isAdmin(User $user)
     {
@@ -431,15 +376,17 @@
 
 
     /* ======================================
-      SET ADMIN
-      - 
-      - Should assign or remove admin role
+     (Not implemented yet)
     ====================================== */
     public function setAdmin(User $user, $isAdmin = true)
     {
       
     }
 
+
+    /* ======================================
+     Get all users
+    ====================================== */
     public function getAllUsers() {
 
        $stmt = $this->conn->prepare("SELECT * FROM users");
@@ -449,6 +396,10 @@
     }
 
 
+
+    /* ======================================
+     Ban user
+    ====================================== */
     public function banUser($id) {
 
       $stmt = $this->conn->prepare("UPDATE users 
@@ -466,6 +417,10 @@
       );
     }
 
+
+    /* ======================================
+     Unban user
+    ====================================== */
     public function unbanUser($id) {
 
       $stmt = $this->conn->prepare("UPDATE users

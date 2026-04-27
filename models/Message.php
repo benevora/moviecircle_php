@@ -4,11 +4,18 @@
   {
     private $url;
 
+    /* ======================================
+      Constructor
+    ====================================== */
     public function __construct($url)
     {
       $this->url = $url;
     }
 
+    
+    /* ======================================
+      Set message
+    ====================================== */
     public function setMessage($msg, $type, $redirect = "index.php") 
     {
 
@@ -24,6 +31,9 @@
     } 
 
 
+    /* ======================================
+      Get message
+    ====================================== */
     public function getMessage() 
     {
       
@@ -38,7 +48,9 @@
 
     } 
 
-
+    /* ======================================
+      Clear message
+    ====================================== */
     public function clearMessage() 
     {
        $_SESSION["msg"] = "";

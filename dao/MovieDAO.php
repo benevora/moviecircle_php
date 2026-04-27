@@ -2,8 +2,6 @@
 
   require_once("models/Movie.php");
   require_once("models/Message.php");
-
-  // Review DAO
   require_once("dao/ReviewDAO.php");
 
   class MovieDAO implements MovieDAOInterface {
@@ -12,11 +10,9 @@
     private $url;
     private $message;
 
+
     /* ======================================
-      CONSTRUCTOR
-      - Receives database connection
-      - Sets base URL
-      - Initializes message system
+      Setup database, base URL, and message system
     ====================================== */
     public function __construct(PDO $conn, $url)
     {
@@ -25,10 +21,15 @@
       $this->message = new Message($url);
     }
 
+
+    /* ======================================
+      Build Movie object from database array
+    ====================================== */
     public function buildMovie($data){
 
       $movie = new Movie();
 
+      // Map DB fields to Movie object
       $movie->id = $data["id"];
       $movie->title = $data["title"];
       $movie->description = $data["description"];
@@ -38,7 +39,7 @@
       $movie->length = $data["length"];
       $movie->users_id = $data["users_id"];
 
-      // receives the film ratings
+      // Attach average rating from reviews
       $reviewDao = new ReviewDAO($this->conn, $this->url);
 
       $rating = $reviewDao->getRatings($movie->id);
@@ -49,11 +50,17 @@
     }
 
 
+    /* ======================================
+      (Not implemented yet)
+    ====================================== */
     public function findAll(){
 
     }
 
 
+    /* ======================================
+      Get latest movies (newest first)
+    ====================================== */
     public function getLatestMovies(){
       
       $movies = [];
@@ -75,6 +82,9 @@
     }
 
 
+    /* ======================================
+      Get movies by category
+    ====================================== */
     public function getMoviesByCategory($category){
       $movies = [];
 
@@ -99,6 +109,9 @@
     }
 
 
+    /* ======================================
+      Get movies created by a user
+    ====================================== */
     public function getMoviesByUserId($id){
       $movies = [];
 
@@ -121,7 +134,9 @@
       return $movies;
     }
 
-
+    /* ======================================
+      Find a movie by ID
+    ====================================== */
     public function findById($id){
       $movie = [];
 
@@ -147,6 +162,9 @@
     }
 
 
+    /* ======================================
+      Search movies by title
+    ====================================== */
     public function findByTitle($title){
       $movies = [];
 
@@ -169,7 +187,10 @@
       return $movies;
     }
 
-
+    
+    /* ======================================
+      Create a new movie
+    ====================================== */
     public function create(Movie $movie){
       $stmt = $this->conn->prepare("INSERT INTO movies(
         title, description, image, trailer, category, length, users_id
@@ -196,7 +217,9 @@
       );
     }
 
-
+    /* ======================================
+      Update movie
+    ====================================== */
     public function update(Movie $movie) {
 
       $stmt = $this->conn->prepare("UPDATE movies SET
@@ -228,6 +251,9 @@
     }
 
 
+    /* ======================================
+      Delete movie
+    ====================================== */
     public function destroy($id){
 
       $stmt = $this->conn->prepare("DELETE FROM movies WHERE id = :id");
@@ -245,6 +271,9 @@
     }
 
 
+    /* ======================================
+      Get all movies with user name
+    ====================================== */
     public function getAllMovies() {
 
       $stmt = $this->conn->prepare("
@@ -258,6 +287,10 @@
       return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
+
+    /* ======================================
+      Get all movies built as objects
+    ====================================== */
     public function getAllMoviesBuilt() {
 
       $movies = [];
@@ -275,7 +308,5 @@
 
       return $movies;
     }
-
-
 
   }

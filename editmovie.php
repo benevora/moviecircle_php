@@ -113,7 +113,7 @@
 
         </form>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-3 movie-image-container">
         <img 
         src="<?= $BASE_URL ?>img/movies/<?= $movie->image ?>" 
         alt="<?= $movie->title ?>" 

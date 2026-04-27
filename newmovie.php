@@ -56,7 +56,7 @@
             <option value="Action">Action</option>
             <option value="Drama">Drama</option>
             <option value="Comedy">Comedy</option>
-            <option value="Fantasy / Fiction">Fantasy / Fiction</option>
+            <option value="Fantasy/Fiction">Fantasy/Fiction</option>
             <option value="Romance">Romance</option>
             <option value="Animation">Animation</option>
           </select>

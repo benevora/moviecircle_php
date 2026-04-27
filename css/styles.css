@@ -1,8 +1,6 @@
 /* ==================================================
-   NAVBAR
+   NAVBAR - header.php
 ================================================== */
-
-/* Logo + Title container */
 .navbar-brand {
   display: flex;
   align-items: flex-end;
@@ -10,47 +8,52 @@
   margin-left: 50px;
 }
 
-/* Logo size */
 #logo {
   width: 40px;
 }
 
-/* Project title styling */
 #moviecircle-title {
   position: relative;
   font-size: 30px;
   font-weight: bold;
   margin-bottom: -5px;
-
-  /* Gold gradient text effect */
   background: linear-gradient(to right, #F4C98E, #8E7553);
   background-clip: text;
   -webkit-background-clip: text;
-
-  /* Makes gradient visible */
   color: transparent;
   -webkit-text-fill-color: transparent;
-
-  /* Smooth hover transition */
   transition: filter 0.3s ease;
 }
 
-/* Title hover effect */
+.navbar-toggler {
+  border-color: #FFD54F;
+}
+
+.navbar-toggler i {
+  color: #FFD54F;
+  font-size: 22px;
+}
+
 #moviecircle-title:hover {
   filter: brightness(1.2);
 }
 
-/* Navbar background */
 #main-navbar {
   background-color: #121212;
 }
 
-
-
-
-/* ==================================================
-   SEARCH FORM
-================================================== */
+@media (max-width: 768px) {
+  #search-form {
+    margin: 10px 0;
+  }
+}
+@media (max-width: 992px) {
+  .navbar-nav {
+    justify-content: flex-start;
+    margin-right: 0;
+    width: 100%;
+  }  
+}
 
 #search-form {
   display: flex;
@@ -61,7 +64,6 @@
   margin: 0 20px;
 }
 
-/* Search input customization */
 #search-form .form-control {
   border: none;
   flex: 1;
@@ -69,63 +71,57 @@
   border-radius: 20px;
 }
 
-
-
-
-/* ==================================================
-   NAVIGATION LINKS
-================================================== */
-
-#navbar {
-  min-width: 30%;
-}
-
-/* Default nav link style */
 .navbar-nav .nav-item .nav-link {
   color: #FFF;
   transition: .5s;
 }
 
-/* Hover highlight effect */
 .navbar-nav .nav-item .nav-link:hover {
-  color: #FFD54F;           /* gold highlight */
+  color: #FFD54F;
 }
 
-/* Align nav items to the right */
 .navbar-nav {
   justify-content: flex-end;
   width: 100%;
   margin-right: 50px;
 }
 
-/* Utility class */
 .bold {
   font-weight: bold;
 }
 
+@media (max-width: 768px) {
+  #search-form {
+    flex-direction: row;
+    width: 100%;
+    margin: 10px 0;
+  }
 
+  #search-form .form-control {
+    width: 100%;
+  }
+
+  .navbar-collapse {
+    padding: 10px 0;
+  }
+}
 
 
 
 /* ==================================================
    FLASH MESSAGES
-   - Temporary user feedback (success / error)
-   - Used with session-based flash system
 ================================================== */
-
-/* Flash message wrapper */
 .msg-container {
-  background-color: #000;   /* Matches site dark theme */
+  background-color: #000;
   padding: 15px;
 }
 
-/* Base message box */
 .msg {
-  width: 60%;                 /* Centered fixed width */
-  margin: 0 auto;             /* Horizontal centering */
+  width: 60%;
+  margin: 0 auto;
   padding: 10px;
   text-align: center;
-  border-radius: 5px;         /* Slight rounded corners */
+  border-radius: 5px;
 }
 
 /* Error message style */
@@ -144,18 +140,17 @@
 
 
 
-
 /* ==================================================
-   HOME SECTION
+   HOME PAGE - index.php
 ================================================== */
 body {
   background-color: #000;
 }
 
 #main-container {         
-  background-color: #000;   /* Black background */
-  color: #FFF;              /* White Text */
-  min-height: 65vh;           /* Minimum viewport height */
+  background-color: #000;
+  color: #FFF;
+  min-height: 65vh;
   padding: 40px;
   max-width: 1200px;
   margin: 0 auto;
@@ -193,7 +188,6 @@ body {
   border: 1px solid #2f2f2f;
 }
 
-
 .section-description {
   color: #ccc;
   font-size: 18px;
@@ -212,17 +206,13 @@ body {
   max-width: 180px;
   margin: 0;
   margin-bottom: 30px;
-  
   flex: 0 1 calc((100% - 100px) / 6);
   max-width: calc((100% - 100px) / 6);
-
-
   border-radius: 12px;
   box-shadow: 0 0 15px rgba(0,0,0,0.5);
   background: linear-gradient(145deg, #1a1a1a, #111);
   border: 1px solid #2a2a2a;
 }
-
 
 .movie-card .card-img-top {
   width: 100%;
@@ -247,8 +237,6 @@ body {
   text-align: center;
 }
 
-
-/* Movie card title - responsive font size */
 .movie-card .card-title a {
   display: block;
   margin-bottom: 10px;
@@ -260,7 +248,6 @@ body {
   text-decoration: none;
 }
 
-/* Buttons stay full width and stacked */
 .movie-card .card-body .btn {
   display: block;
   width: 100%;
@@ -272,7 +259,6 @@ body {
 .card-title {
   height: 3rem;
 }
-
 
 .fas.fa-star {
   color: #FFD54F;
@@ -324,15 +310,26 @@ body {
   }
 }
 
+/* ==================================================
+  SEARCH - search.php
+================================================== */
+#search-title {
+  font-size: 40px;
+}
+
+#search-result,
+.back-link {
+  color: #FFD54F;
+  text-decoration: none;
+}
+
 
 /* ==================================================
-   AUTHENTICATION 
+   AUTHENTICATION PAGE - auth.php
 ================================================== */
-
 #auth-row {
   justify-content: space-evenly; 
 }
-
 
 #login-container h2,
 #register-container h2 {
@@ -342,7 +339,6 @@ body {
   margin: 0 auto;
   padding: 10px;
 }
-
 
 #login-container form,
 #register-container form {
@@ -356,11 +352,6 @@ body {
   margin-bottom: 1rem;
 }
 
-
-/* ==================================================
-   PRIMARY AUTH BUTTON
-   - Used for Login and Register submit buttons
-================================================== */
 .card-btn {
   color: #000;
   background-color: #FFD54F;
@@ -368,24 +359,11 @@ body {
   width: 100%;
 }
 
-
-/* ==================================================
-   BUTTON HOVER EFFECT
-   - Inverts button style for interactivity
-================================================== */
 .card-btn:hover {
   background-color: transparent;
   color: #FFD54F;
   border-color: #FFD54F;
   transition: all 0.2s ease-in-out;
-}
-
-
-@media (max-width: 768px) {
-  #login-container,
-  #register-container {
-    margin-bottom: 30px;
-  }
 }
 
 #login-container form,
@@ -411,119 +389,16 @@ body {
   padding: 12px;
 }
 
-/* ==================================================
-  EDIT PROFILE
-================================================== */
-#edit-row {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-
-/* EDIT PROFILE CARDS */
-
-.edit-profile-page .col-md-6 {
-  padding: 0 20px;
-}
-
-.edit-profile-page form {
-  background-color: #121212;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.5);
-  background: linear-gradient(145deg, #1a1a1a, #111);
-  border: 1px solid #2a2a2a;
-}
-
-/* Space between forms (left side) */
-.edit-profile-page form + form {
-  margin-top: 30px;
-}
-
-
-.edit-profile-page h1 {
-  margin-bottom: 10px;
-}
-
-.page-description {
-  margin-bottom: 25px;
-}
-
-#profile-image-container, 
-.profile-image-container {
-  width: 140px;
-  height: 140px;
-  margin: 0 auto;
-  border-radius: 50%;
-  background-size: cover;
-  background-position: center;
-  border: 3px solid #f4c542;
-  margin-bottom: 20px;
-}
-
-.profile-image-container {
-  width: 70px;
-  height: 70px;
-}
-
-#profile-image-container:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 15px rgba(255, 213, 79, 0.5);
-}
-
 @media (max-width: 768px) {
-  .edit-profile-page .col-md-4 {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 20px;
+  #login-container,
+  #register-container {
+    margin-bottom: 30px;
   }
 }
 
-.page-description {
-  color: #999;
-}
-
-
-#bio {
-  max-width: 400px;
-}
-
-
-.disabled {
-  background-color: #BBB;
-  cursor: not-allowed;
-  opacity: 0.8;
-}
-
-
-.edit-profile-page .card-btn, 
-#add-movie-container .card-btn,
-#review-form-container .card-btn, 
-#edit-movie-form .card-btn {
-  width: 100%;
-  max-width: 200px;
-}
-
-
-.edit-profile-page input[type="file"] {
-  width: 100%;
-  max-width: 100%;
-  background-color: #1c1c1c;
-  color: #ccc;
-  border: 1px solid #333;
-}
-
-.edit-profile-page input,
-.edit-profile-page textarea {
-  border: 1px solid #2f2f2f;
-  border-radius: 8px;
-  padding: 12px;
-  transition: all 0.2s ease;
-}
-
 
 /* ==================================================
-  USER PROFILE
+  USER PROFILE PAGE - profile.php
 ================================================== */
 .profile-container {
   justify-content: center;
@@ -577,7 +452,6 @@ body {
   max-width: calc(33.333% - 20px);
 }
 
-
 .user-card {
   display: flex;
   align-items: center;
@@ -608,7 +482,6 @@ body {
   font-size: 14px;
 }
 
-
 .user-card {
   display: flex;
   gap: 10px;
@@ -620,7 +493,6 @@ body {
   text-decoration: none;
   color: white;
 }
-
 
 .profile-side-link strong {
   display: block;
@@ -642,8 +514,6 @@ body {
   background-color: #2a2a2a;
 }
 
-
-
 .profile-layout {
   display: flex;
 }
@@ -660,10 +530,9 @@ body {
   gap: 12px;
 
   position: sticky;
-  top: 100px; /* stays visible while scrolling */
+  top: 100px;
 }
 
-/* Buttons look nicer */
 .profile-sidebar .profile-side-link {
   background-color: #1c1c1c;
   padding: 12px;
@@ -679,14 +548,12 @@ body {
   transform: scale(1.03);
 }
 
-
-
 .follow-link,
 .unfollow-link {
   background: none;
   border: none;
   padding: 0;
-  color: #FFD54F; /* or your theme color */
+  color: #FFD54F;
   font-weight: bold;
   cursor: pointer;
   text-decoration: none;
@@ -701,11 +568,127 @@ body {
   color: #28a745;
 }
 
+@media (max-width: 992px) {
+  .added-movies-container {
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-layout {
+    flex-direction: column;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
 
 
 
 /* ==================================================
-  NEW MOVIE
+  EDIT PROFILE PAGE - editprofile.php
+================================================== */
+#edit-row {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.edit-profile-page .col-md-6 {
+  padding: 0 20px;
+}
+
+.edit-profile-page form {
+  background-color: #121212;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  background: linear-gradient(145deg, #1a1a1a, #111);
+  border: 1px solid #2a2a2a;
+}
+
+.edit-profile-page form + form {
+  margin-top: 30px;
+}
+
+.edit-profile-page h1 {
+  margin-bottom: 10px;
+}
+
+.page-description {
+  margin-bottom: 25px;
+}
+
+#profile-image-container, 
+.profile-image-container {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  border: 3px solid #f4c542;
+  margin-bottom: 20px;
+}
+
+.profile-image-container {
+  width: 70px;
+  height: 70px;
+}
+
+#profile-image-container:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 213, 79, 0.5);
+}
+
+@media (max-width: 768px) {
+  .edit-profile-page .col-md-4 {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+}
+
+.page-description {
+  color: #999;
+}
+
+#bio {
+  max-width: 400px;
+}
+
+.disabled {
+  background-color: #BBB;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.edit-profile-page .card-btn, 
+#add-movie-container .card-btn,
+#review-form-container .card-btn, 
+#edit-movie-form .card-btn {
+  width: 100%;
+  max-width: 200px;
+}
+
+.edit-profile-page input[type="file"] {
+  width: 100%;
+  max-width: 100%;
+  background-color: #1c1c1c;
+  color: #ccc;
+  border: 1px solid #333;
+}
+
+.edit-profile-page input,
+.edit-profile-page textarea {
+  border: 1px solid #2f2f2f;
+  border-radius: 8px;
+  padding: 12px;
+  transition: all 0.2s ease;
+}
+
+
+
+/* ==================================================
+ ADD FILM PAGE - newmovie.php
 ================================================== */
 .new-movie-container {
   text-align: center;
@@ -762,7 +745,7 @@ body {
 }
 
 #add-movie-form select:focus {
-  border-color: #FFD54F; /* your gold */
+  border-color: #FFD54F;
   box-shadow: 0 0 5px rgba(255, 213, 79, 0.5);
   outline: none;
 }
@@ -784,7 +767,6 @@ body {
   padding: 10px;
   color: #000;
 }
-
 
 #add-movie-form .btn {
   border: 1px solid #FFD54F;
@@ -809,7 +791,7 @@ body {
 
 
 /* ==================================================
-  MOVIE
+  MOVIE- movie.php
 ================================================== */
 .movie-container {
   text-align: center;
@@ -863,8 +845,6 @@ body {
   flex-wrap: wrap;
 }
 
-
-
 .pipe {
   border: 1px solid #333;
   margin: 0 10px;
@@ -881,7 +861,7 @@ body {
 
 .trailer-container iframe {
   width: 100%;
-  height: 330px; /* same as poster */
+  height: 330px;
   border-radius: 6px;
   box-shadow: 0 0 15px rgba(0,0,0,0.5);
   background: linear-gradient(145deg, #1a1a1a, #111);
@@ -889,10 +869,10 @@ body {
 }
 
 .movie-page-image {
-  width: 100%;        /* fill the container width */
-  max-width: 220px;   /* optional fixed maximum */
-  height: auto;       /* scale height automatically */
-  object-fit: contain; /* show full image without cropping */
+  width: 100%;
+  max-width: 220px;
+  height: auto;
+  object-fit: contain;
   border-radius: 8px;
   box-shadow: 0 0 15px rgba(0,0,0,0.5);
   background: linear-gradient(145deg, #1a1a1a, #111);
@@ -932,7 +912,6 @@ body {
   margin-bottom: 15px;
 }
 
-
 #review-form-container select {
   appearance: auto;
   -webkit-appearance: auto;
@@ -942,7 +921,6 @@ body {
   padding: 10px;
   color: #111;
 }
-
 
 #reviews-container {
   margin-top: 20px;
@@ -975,13 +953,73 @@ body {
   margin-bottom: 5px;
 }
 
+@media (max-width: 576px) {
+  .added-movies-container .movie-card {
+    flex: 0 1 100%;
+    max-width: 100%;
+  }
 
+   .review .author-details-container {
+    width: 100%;
+    gap: 10px;
+    width: 100%;
+    flex: 0 0 40px;
+    margin: 0 !important;
+  }
 
+  .review-image {
+    flex: 0 0 40px;
+    margin: 0 !important;
+  }
+  
+}
+
+@media (max-width: 992px) {
+
+  .movie-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .movie-details span {
+    padding-bottom: 8px;
+  }
+
+  .pipe {
+    display: none;
+  }
+
+  .review .author-details-container {
+    flex-direction: row;
+    align-items: flex-start;
+    margin-left: 30px;
+  }
+
+}
+
+@media (max-width: 450px) {
+
+  .review .author-details-container {
+    width: 100%;
+    gap: 10px;
+    width: 100%;
+    flex: 0 0 40px;
+    margin: 0 !important;
+  }
+
+  .review-image {
+    flex: 0 0 40px;
+    margin: 0 !important;
+  }
+  
+}
 
 
 
 /* ==================================================
-  DASHBOARD - MY FILMS PAGE
+  MY FILMS PAGE - dashboard.php
 ================================================== */
 #add-movie-container {
   text-align: right;
@@ -1080,11 +1118,9 @@ body {
   text-align: center
 }
 
-
 .movie-title-cell {
   max-width: 250px;
 }
-
 
 .actions-column form{
   display: inline;
@@ -1150,17 +1186,9 @@ body {
 }
 
 
-
-
-
-
-
-
 /* ==================================================
-  EDIT MOVIE PAGE
+  EDIT MOVIE PAGE - editmovie.php
 ================================================== */
-
-/* Main container adjustments */
 #main-container {
   background-color: #000;
   color: #FFF;
@@ -1169,7 +1197,6 @@ body {
   margin: 0 auto;
 }
 
-/* Page title and description */
 #main-container h1 {
   font-size: 32px;
   margin-bottom: 10px;
@@ -1181,7 +1208,6 @@ page-description {
   margin-bottom: 30px;
 }
 
-/* Form and image row */
 #edit-movie-form-row {
   display: flex;
   gap: 30px;
@@ -1189,9 +1215,8 @@ page-description {
   align-items: flex-start;
 }
 
-/* Form column */
 #edit-movie-form {
-  flex: 1 1 400px; /* Grow, shrink, base width */
+  flex: 1 1 400px;
   background: linear-gradient(145deg, #1a1a1a, #111);
   border: 1px solid #2a2a2a;
   padding: 25px;
@@ -1199,7 +1224,6 @@ page-description {
   box-shadow: 0 0 15px rgba(0,0,0,0.5);
 }
 
-/* Form group spacing */
 #edit-movie-form .form-group {
   margin-bottom: 20px;
 }
@@ -1209,9 +1233,6 @@ page-description {
   display: block;
   margin-bottom: 8px;
 }
-
-
-/* Inputs and textarea */
 
 #edit-movie-form input[type="url"],
 #edit-movie-form input[type="file"] {
@@ -1225,7 +1246,6 @@ page-description {
   transition: all 0.2s ease;
 }
 
-
 #edit-movie-form  select {
   appearance: auto;
   -webkit-appearance: auto;
@@ -1236,7 +1256,6 @@ page-description {
   color: #000;
 }
 
-/* Submit button */
 #edit-movie-form .card-btn {
   background-color: #FFD54F;
   color: #000;
@@ -1254,10 +1273,8 @@ page-description {
   border-color: #FFD54F;
 }
 
-
-/* Image column */
 #edit-movie-image {
-  flex: 0 0 220px; /* fixed width */
+  flex: 0 0 220px;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -1265,7 +1282,7 @@ page-description {
 
 #edit-movie-image img {
   width: 100%;
-  height: auto; /* preserve aspect ratio */
+  height: auto;
   max-height: 400px;
   border-radius: 12px;
   box-shadow: 0 0 15px rgba(0,0,0,0.5);
@@ -1288,6 +1305,10 @@ page-description {
     max-width: 300px;
     max-height: 350px;
   }
+
+  .movie-image-container {
+    margin-top: 1rem;
+  }
 }
 
 @media (max-width: 576px) {
@@ -1304,7 +1325,7 @@ page-description {
 
 
 /* ==================================================
-  ADMIN
+  ADMIN PANEL PAGE - admin.php
 ================================================== */
 .section-description {
   margin-bottom: 20px;
@@ -1346,7 +1367,6 @@ page-description {
   transition: color 0.3s ease;
 }
 
-
 .table-user-link {
   color: #FFF;
   font-weight: bold;
@@ -1379,7 +1399,6 @@ page-description {
   border: 1px solid #FF4C4C;
 }
 
-
 .btn-unban {
   display: inline-flex;
   align-items: center;
@@ -1410,7 +1429,6 @@ page-description {
   justify-content: center;
 }
 
-
 .status-badge {
   font-size: 12px;
   text-transform: uppercase;
@@ -1426,24 +1444,9 @@ page-description {
   color: #28a745;
 }
 
-
 /* ==================================================
-  SEARCH
+  FOOTER - footer.php
 ================================================== */
-#search-title {
-  font-size: 40px;
-}
-
-#search-result,
-.back-link {
-  color: #FFD54F;
-  text-decoration: none;
-}
-
-/* ==================================================
-  FOOTER
-================================================== */
-
 #footer {
   background-color: #000;
   color: #FFF;
@@ -1452,21 +1455,18 @@ page-description {
   padding: 20px;
 }
 
-/* Remove list styling */
 #social-container ul,
 #footer-links-container ul {
   list-style-type: none;
   padding: 0;
 }
 
-/* Horizontal list items */
 #social-container li,
 #footer-links-container li {
   display: inline-block;
   margin: 0 20px;
 }
 
-/* Social icon container */
 #social-container li {
   height: 40px;
   width: 40px;
@@ -1475,12 +1475,10 @@ page-description {
   line-height: 3;
 }
 
-/* Social icon hover background */
 #social-container li:hover {
   background-color: #333;
 }
 
-/* Footer links and social icons color */
 #social-container a,
 #footer-links-container a {
   text-decoration: none;
@@ -1488,13 +1486,89 @@ page-description {
   transition: .5s;
 }
 
-/*  social icons size */
 #social-container li i {
   font-size: 25px;
 }
 
-/* Footer spacing */
 #footer-links-container {
   margin: 30px 0;
 }
 
+
+
+/* ==================================================
+  Responsive
+================================================== */
+@media(max-width: 450px) {
+  
+  #main-container {
+    padding: 20px;
+  }
+
+  /* Home */
+  #search-form {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  #search-form .form-control {
+    width: 85%;
+  }
+
+  .section-title {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .movie-container {
+    padding: 0 15px;
+  }
+
+  .movie-card {
+    width: 100%;
+  }
+
+  .movie-details {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .movie-details span {
+    padding-bottom: 8px;
+  }
+
+  .pipe {
+    display: none;
+  }
+
+  .movie-container iframe {
+    max-width: 100% !important;
+  }
+
+  #reviews-container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  #review-form-container select,
+  #review-form-container textarea {
+    width: 100%;
+  }
+
+  .empty-list {
+    margin-top: 20px;
+  }
+
+  .msg {
+    width: 100%;
+  }
+
+  /* Movie */
+  .review {
+    padding: 0 15px;
+  } 
+
+  .fas.fa-bars {
+    color: #FFD54F;
+  }
+}

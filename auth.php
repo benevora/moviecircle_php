@@ -8,24 +8,24 @@
      - Sends form data via POST for processing
   ================================================== */
 
-  // Include header template
-  // Contains: HTML <head>, navbar, opening body structure
+  /* ======================================
+    Load header template
+  ====================================== */
   require_once("templates/header.php");
 ?>
 
-<!-- ==================================================
-     MAIN CONTENT CONTAINER
-================================================== -->
-<div id="main-container" class="container-fluid">
+<!-- ======================================
+  MAIN AUTH CONTAINER
+====================================== -->
+<div id="main-container" class="container-fluid" >
   <div class="col-md-12">
     <div class="row" id="auth-row">
 
 
-      <!-- ==================================================
-           LOGIN SECTION
-           - Allows existing users to authenticate
-           - Sends form data with type="login"
-      ================================================== -->
+       <!-- ======================================
+        LOGIN SECTION
+        - Authenticates existing users
+      ====================================== -->
       <div class="col-md-4" id="login-container">
         <h2>Login</h2>
 
@@ -35,7 +35,7 @@
           <!-- Hidden field used to identify form type -->
           <input type="hidden" name="type" value="login">
 
-          <!-- Email Field -->
+          <!-- Email -->
           <div class="form-group">
             <label for="email">Email:</label>
             <input  type="email" 
@@ -45,7 +45,7 @@
                     required>
           </div>
           
-          <!-- Password Field -->
+          <!-- Password -->
           <div class="form-group">
             <label for="password">Password:</label>
             <input  type="password" 
@@ -61,11 +61,10 @@
         </form>
       </div>
 
-      <!-- ==================================================
-           REGISTRATION SECTION
-           - Allows new users to create an account
-           - Sends form data with type="register"
-      ================================================== -->
+       <!-- ======================================
+        REGISTER SECTION
+        - Creates new user accounts
+      ====================================== -->
       <div class="col-md-4" id="register-container">
         <h2>Create Account</h2>
 
@@ -75,7 +74,7 @@
           <!-- Hidden field used to identify form type -->
           <input type="hidden" name="type" value="register">
 
-          <!-- Email Field -->
+          <!-- Email -->
           <div class="form-group">
             <label for="email">Email:</label>
             <input  type="email" 
@@ -85,7 +84,7 @@
                     placeholder="Enter your email">
           </div>
 
-          <!-- First Name Field -->
+          <!-- First Name -->
           <div class="form-group">
             <label for="name">Name:</label>
             <input  type="text" 
@@ -95,7 +94,7 @@
                     placeholder="Enter your name">
           </div>
 
-          <!-- Last Name Field -->
+          <!-- Last Name -->
           <div class="form-group">
             <label for="lastname">Last Name:</label>
             <input  type="text" 
@@ -105,7 +104,7 @@
                     placeholder="Enter your last name">
           </div>
 
-          <!-- Password Field -->
+          <!-- Password -->
           <div class="form-group">
             <label for="password">Password:</label>
             <input  type="password" 
@@ -115,7 +114,7 @@
                     placeholder="Enter your password">
           </div>
 
-          <!-- Password Confirmation Field -->
+          <!-- PConfirm Password  -->
           <div class="form-group">
             <label for="confirmpassword">Password confirmation:</label>
             <input  type="password" 
@@ -125,7 +124,7 @@
                     placeholder="Confirm your password">
           </div>
 
-          <!-- Submit Button -->
+          <!-- Submit -->
           <input type="submit" class="btn card-btn" value="Register">
 
         </form>
@@ -136,13 +135,10 @@
 </div>
 
 <?php
-  /* ======================================
-     FOOTER TEMPLATE
-     - Closes main layout structure
-     - Loads footer section
-     - Includes JavaScript files
-  ====================================== */
 
+  /* ======================================
+    Load footer template
+  ====================================== */
   // Load footer template (footer + scrips)
   require_once("templates/footer.php");
 ?>
