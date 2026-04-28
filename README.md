@@ -43,7 +43,7 @@ MovieCircle is a full-stack PHP web application where users can discover movies,
 
 1. Clone the repository:
 
-   git clone https://github.com/your-username/moviecircle.git
+   git clone https://github.com/benevora/moviecircle_php.git
    
 2. Move into the project folder:
 
